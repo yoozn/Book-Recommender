@@ -46,6 +46,9 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.firebase.database)
+    // Firebase Authentication and Google Sign-In using the version catalog
+    implementation(libs.firebase.auth)  // This will refer to the version defined in libs.versions.toml
+    implementation(libs.google.auth)     // This will refer to the version defined in libs.versions.toml
     implementation (libs.volley)
     implementation (libs.squareup.picasso)
     testImplementation(libs.junit)

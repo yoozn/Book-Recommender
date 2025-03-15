@@ -11,6 +11,8 @@ googleGmsGoogleServices = "4.4.2"
 firebaseDatabase = "21.0.0"
 picassoVersion = "2.71828"
 volley = "1.2.1"
+firebaseAuth = "23.1.0"  # Add this for Firebase Authentication
+googleAuth = "20.7.0"    # Add this for Google Sign-In
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -21,6 +23,8 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+google-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "googleAuth" }
 squareup-picasso = { module = "com.squareup.picasso:picasso", version.ref = "picassoVersion" }
 volley = { module = "com.android.volley:volley", version.ref = "volley" }
 

@@ -25,12 +25,16 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private TextView googleLogin;
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
+
+        mAuth = FirebaseAuth.getInstance();
+
         /**
          * Setting specific text, Google Account to be clickable.
          * Also to make the Create Account here to be clickable.
