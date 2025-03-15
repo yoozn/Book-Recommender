@@ -1,5 +1,8 @@
+import org.gradle.internal.impldep.bsh.commands.dir
+
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -32,11 +35,19 @@ android {
 }
 
 dependencies {
+    /**
+     * Dependencies added: Libs.volley and Libs.squareup.picasso
+     * The former one is used to fecth the data from Google API (Book data)
+     * The latter one is used to load the images into our system. s
+     */
 
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.database)
+    implementation (libs.volley)
+    implementation (libs.squareup.picasso)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420491052026",
+    "project_id": "seng-3210-project-4dd9d",
+    "storage_bucket": "seng-3210-project-4dd9d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420491052026:android:be5e7d584287df0cc29a43",
+        "android_client_info": {
+          "package_name": "com.example.project_ui_implementation"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-eQKNdo41jPFXmAEDdWaI75t_kykzBjI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

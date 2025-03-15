@@ -1,0 +1,52 @@
+package com.example.project_ui_implementation.model;
+
+import java.net.PasswordAuthentication;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class Users {
+    //List to keep a history of the Genre.
+    private ArrayList<String> Genre;
+
+    //Username corresponding to one person
+    private String Username;
+
+    //Password for a user
+    private String Password;
+
+    //Default constructor of the class.
+    Users(){};
+
+    //Constructor of the class.
+    public Users(String wUsername, String wPassword){
+        Username=wUsername;
+        Password=wPassword;
+        Genre=new ArrayList<>();
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+    public String getUsername() {
+        return Username;
+    }
+    public ArrayList<String> getGenre() {
+        return Genre;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
+    public void setUsername(String username) {
+        Username = username;
+    }
+
+    public void addGenre(String nGenre){
+        Genre.add(nGenre);
+    }
+    @Override
+    public String toString(){
+        return "User: "+Username;
+    }
+}
