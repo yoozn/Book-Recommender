@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         TextInputLayout fieldUsername = findViewById(R.id.layoutUsernameInput);
         TextInputLayout fieldPassword = findViewById(R.id.layoutPasswordInput);
         EditText txtUsername =fieldUsername.getEditText();
-        EditText txtPassword= fieldUsername.getEditText();
+        EditText txtPassword= fieldPassword.getEditText();
         String nUsername=txtUsername.getText().toString();
         String nPassword=txtPassword.getText().toString();
         Users newUser = new Users(nUsername, nPassword);
