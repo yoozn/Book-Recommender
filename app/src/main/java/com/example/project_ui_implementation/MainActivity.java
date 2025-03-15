@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         databaseReference=database.getReference("Users");
         databaseReference.child(newUser.toString()).setValue(newUser);
         Toast.makeText(MainActivity.this, "User added", Toast.LENGTH_LONG).show();
+        txtUsername.setText("");
+        txtPassword.setText("");
 
     }
 

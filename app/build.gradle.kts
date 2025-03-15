@@ -38,7 +38,7 @@ dependencies {
     /**
      * Dependencies added: Libs.volley and Libs.squareup.picasso
      * The former one is used to fecth the data from Google API (Book data)
-     * The latter one is used to load the images into our system. s
+     * The latter one is used to load the images into our system.
      */
 
     implementation(libs.appcompat)
