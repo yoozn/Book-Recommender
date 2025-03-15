@@ -1,6 +1,7 @@
 package com.example.project_ui_implementation;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -46,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
         ClickableSpan ClicktxtcrtA= new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                Toast.makeText(MainActivity.this, "Creating User", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "Creating User", Toast.LENGTH_LONG).show();
+                Intent goCreateAccunt= new Intent(MainActivity.this, CreateAccount.class);
+                startActivity(goCreateAccunt);
             }
         };
         spannabletxtcrtA.setSpan(ClicktxtcrtA, 33, 45, 0);
