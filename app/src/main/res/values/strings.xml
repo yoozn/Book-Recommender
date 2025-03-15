@@ -10,4 +10,8 @@
     <string name="todo">TODO</string>
     <string name="add_user">Add User</string>
     <string name="don_t_have_an_account_create_an_account_here">Don\'t have an account? Create an Account here</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_new_password">Enter new Password</string>
+    <string name="create_account_for_yourcodex">Create Account for YourCodex</string>
+    <string name="create_account">Create Account</string>
 </resources>

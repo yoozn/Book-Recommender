@@ -69,25 +69,5 @@ public class MainActivity extends AppCompatActivity {
         googleLogin.setText(spannabletxtGL);
         //----------------------------------------------------------------------//
     }
-    //Method to add Usernames inside the database.
-    public void addUsername(View view){
-        //Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_LONG).show();
-        @SuppressLint("WrongViewCast")
-        TextInputLayout fieldUsername = findViewById(R.id.layoutUsernameInput);
-        TextInputLayout fieldPassword = findViewById(R.id.layoutPasswordInput);
-        EditText txtUsername =fieldUsername.getEditText();
-        EditText txtPassword= fieldPassword.getEditText();
-        String nUsername=txtUsername.getText().toString();
-        String nPassword=txtPassword.getText().toString();
-        Users newUser = new Users(nUsername, nPassword);
-        newUser.addGenre("Romance");
-        newUser.addGenre("Action");
-        databaseReference=database.getReference("Users");
-        databaseReference.child(newUser.toString()).setValue(newUser);
-        Toast.makeText(MainActivity.this, "User added", Toast.LENGTH_LONG).show();
-        txtUsername.setText("");
-        txtPassword.setText("");
-    }
-
 }
 
