@@ -11,12 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.project_ui_implementation.model.Users;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,15 +24,36 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private TextView googleLogin;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
-
+        /**
+         * Setting specific text, Google Account to be clickable.
+         * Also to make the Create Account here to be clickable.
+         */
         TextView googleLogin = findViewById(R.id.loginGoogle);
+        TextView crtAccount = findViewById(R.id.crtAccountTXT);
         String txtGL= googleLogin.getText().toString();
+        String txtcrtA=crtAccount.getText().toString();
         SpannableString spannabletxtGL= new SpannableString(txtGL);
+        SpannableString spannabletxtcrtA= new SpannableString(txtcrtA);
+        //Changing the settings of the Strings inside the textViews
+        spannabletxtcrtA.setSpan(new ForegroundColorSpan(Color.RED), 33, 45, 0);
+        //Clickable to create a new user.
+        ClickableSpan ClicktxtcrtA= new ClickableSpan() {
+            @Override
+            public void onClick(@NonNull View widget) {
+                Toast.makeText(MainActivity.this, "Creating User", Toast.LENGTH_LONG).show();
+            }
+        };
+        spannabletxtcrtA.setSpan(ClicktxtcrtA, 33, 45, 0);
+        crtAccount.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
+        crtAccount.setText(spannabletxtcrtA);
+
+        //Clickable logging for google
         spannabletxtGL.setSpan(new ForegroundColorSpan(Color.RED), 11, 25, 0);
         ClickableSpan ClicktxtGL= new ClickableSpan() {
             @Override
@@ -47,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         spannabletxtGL.setSpan(ClicktxtGL, 11, 25, 0);
         googleLogin.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         googleLogin.setText(spannabletxtGL);
+        //----------------------------------------------------------------------//
     }
     //Method to add Usernames inside the database.
     public void addUsername(View view){
@@ -66,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, "User added", Toast.LENGTH_LONG).show();
         txtUsername.setText("");
         txtPassword.setText("");
-
     }
 
 }
