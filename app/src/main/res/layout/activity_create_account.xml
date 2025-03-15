@@ -7,16 +7,44 @@
     android:layout_height="match_parent"
     tools:context=".CreateAccount">
 
+    <Button
+        android:id="@+id/btnGoBack"
+        android:layout_width="116dp"
+        android:layout_height="57dp"
+        android:background="#A81E1E"
+        android:onClick="addUsername"
+        android:text="Go Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="116dp"
+        android:layout_height="57dp"
+        android:background="#A81E1E"
+        android:onClick="addUsername"
+        android:text="@string/create_account"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.962" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilwUsername"
         android:layout_width="332dp"
         android:layout_height="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.443"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315">
+        app:layout_constraintVertical_bias="0.317">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/hintNewUsername"
@@ -31,9 +59,10 @@
         android:layout_height="67dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.459">
+        app:layout_constraintVertical_bias="0.423">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/hintNewPassword"
@@ -43,7 +72,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textTittle"
         android:layout_width="220dp"
         android:layout_height="86dp"
         android:text="@string/create_account_for_yourcodex"
@@ -70,17 +99,51 @@
         app:layout_constraintVertical_bias="0.144"
         app:srcCompat="@drawable/picture2" />
 
-    <Button
-        android:id="@+id/btnAdd"
-        android:layout_width="116dp"
+    <TextView
+        android:id="@+id/textHelp"
+        android:layout_width="325dp"
         android:layout_height="57dp"
-        android:background="#A81E1E"
-        android:onClick="addUsername"
-        android:text="@string/create_account"
+        android:fontFamily="serif"
+        android:text="@string/help_us_to_know_you_better"
+        android:textSize="16sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintVertical_bias="0.547" />
+
+    <TextView
+        android:id="@+id/textSelection"
+        android:layout_width="334dp"
+        android:layout_height="43dp"
+        android:background="@android:drawable/editbox_background_normal"
+        android:fontFamily="serif"
+        android:text="@string/select_book_s_genre"
+        android:textSize="16sp"
+        app:drawableRightCompat="@android:drawable/arrow_down_float"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.619" />
+
+    <TextView
+        android:id="@+id/textqGenre"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:fontFamily="serif"
+        android:text="@string/what_type_of_books_you_enjoy_the_most"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.59" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

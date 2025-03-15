@@ -14,4 +14,7 @@
     <string name="enter_new_password">Enter new Password</string>
     <string name="create_account_for_yourcodex">Create Account for YourCodex</string>
     <string name="create_account">Create Account</string>
+    <string name="what_type_of_books_you_enjoy_the_most">What type of books you enjoy the most?</string>
+    <string name="help_us_to_know_you_better">Help us to know you better.</string>
+    <string name="select_book_s_genre">Select Book\'s Genre</string>
 </resources>
