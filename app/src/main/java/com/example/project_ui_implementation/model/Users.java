@@ -15,13 +15,13 @@ public class Users {
     private String Password;
 
     //Default constructor of the class.
-    Users(){};
+    public Users(){};
 
     //Constructor of the class.
     public Users(String wUsername, String wPassword){
         Username=wUsername;
         Password=wPassword;
-        Genre=new ArrayList<>();
+        Genre=new ArrayList<String>();
     }
 
     public String getPassword() {
