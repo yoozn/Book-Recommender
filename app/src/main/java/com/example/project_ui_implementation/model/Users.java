@@ -15,7 +15,7 @@ public class Users {
     private String Password;
 
     //Default constructor of the class.
-    Users(){};
+    public Users(){};
 
     //Constructor of the class.
     public Users(String wUsername, String wPassword){
