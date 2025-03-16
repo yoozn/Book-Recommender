@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, HorizontalCarouselActivity.class);
         startActivity(intent);
-
         TextView googleLogin = findViewById(R.id.loginGoogle);
         TextView crtAccount = findViewById(R.id.crtAccountTXT);
         String txtGL= googleLogin.getText().toString();
