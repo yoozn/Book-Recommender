@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             if (isValid){
                 Intent goHomepage = new Intent(MainActivity.this, homePage.class);
+                goHomepage.putExtra("currentUsername", nUsername);
                 startActivity(goHomepage);
             }
             else {
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(MainActivity.this, "Something went Wrong :(", Toast.LENGTH_LONG).show();
             }
         });
     }
