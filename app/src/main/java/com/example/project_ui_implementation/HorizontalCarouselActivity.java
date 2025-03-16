@@ -1,6 +1,8 @@
 package com.example.project_ui_implementation;
 
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +42,8 @@ public class HorizontalCarouselActivity extends AppCompatActivity {
         bookList.add(new Books("Book Number Three", "Test Author3"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
         bookAdapter = new BookAdapter(bookList);
         recyclerView.setAdapter(bookAdapter);
 
