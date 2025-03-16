@@ -19,7 +19,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookCarousel"
-            android:layout_width="372dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:scrollbars="horizontal" />

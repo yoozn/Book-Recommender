@@ -6,17 +6,19 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="129dp" >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
             android:orientation="vertical">
 
             <ImageView
@@ -29,21 +31,21 @@
                 android:id="@+id/bookTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Book Title"
-                android:textSize="16sp"
-                android:textColor="#000000"
+                android:layout_gravity="center"
                 android:layout_marginTop="3dp"
-                android:layout_gravity="center"/>
+                android:text="Book Title"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/bookAuthor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Author"
-                android:textSize="14sp"
-                android:textColor="#000000"
+                android:layout_gravity="center"
                 android:layout_marginBottom="2dp"
-                android:layout_gravity="center"/>
+                android:text="Author"
+                android:textColor="#000000"
+                android:textSize="14sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

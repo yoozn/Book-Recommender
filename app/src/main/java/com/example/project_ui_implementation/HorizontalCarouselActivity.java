@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ui_implementation.model.BookAdapter;
@@ -37,6 +39,7 @@ public class HorizontalCarouselActivity extends AppCompatActivity {
         bookList.add(new Books("Book Number Two", "Test Author2"));
         bookList.add(new Books("Book Number Three", "Test Author3"));
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bookAdapter = new BookAdapter(bookList);
         recyclerView.setAdapter(bookAdapter);
 
