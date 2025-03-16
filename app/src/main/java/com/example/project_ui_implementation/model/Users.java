@@ -21,7 +21,7 @@ public class Users {
     public Users(String wUsername, String wPassword){
         Username=wUsername;
         Password=wPassword;
-        Genre=new ArrayList<>();
+        Genre=new ArrayList<String>();
     }
 
     public String getPassword() {

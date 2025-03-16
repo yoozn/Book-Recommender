@@ -25,20 +25,13 @@ import java.util.Collections;
 
 public class CreateAccount extends AppCompatActivity {
 
-    private Users newUser = new Users();
-
+    Users newUser= new Users("wName", "wPassword");
     private Button goBackbtn;
-    private boolean[] selectedGenre;
 
-    private ArrayList<Integer> GenreList = new ArrayList<>();
+    String[] genreOptions = {"Fiction", "History", "Poetry", "Medical", "Music", "Philosophy",
+            "Mathematics", "Bibles", "Art", "Design", "Drama", "Computers"};
 
-    TextView textView;
-    boolean[] selectedLanguage;
-    ArrayList<Integer> langList = new ArrayList<>();
-    String[] langArray = {"Java", "C++", "Kotlin", "C", "Python", "Javascript"};
-
-
-    String[] genreOptions = {"Fiction", "History", "Poetry", "Medical"};
+    private boolean[] selectedGenre=new boolean[genreOptions.length];
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
@@ -61,7 +54,41 @@ public class CreateAccount extends AppCompatActivity {
          *Creation of the dropdown box to select the Subject.
          *
          */
-
+        TextView txtSelection = findViewById(R.id.textSelection);
+        txtSelection.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dropdownBox = new AlertDialog.Builder(CreateAccount.this);
+                dropdownBox.setTitle("Select the Subjects to your liking...").setMultiChoiceItems(genreOptions, selectedGenre, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                        selectedGenre[which]=isChecked;
+                    }
+                }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        StringBuilder allSelectedOptions = new StringBuilder();
+                        for (int i=0; i<selectedGenre.length; i++){
+                            if (selectedGenre[i]){
+                                allSelectedOptions.append(genreOptions[i]).append(", ");
+                                //Here you would add the to the array list of the user.
+                                newUser.addGenre(genreOptions[i]);
+                            }
+                        }
+                        if (allSelectedOptions.length() > 0){
+                            allSelectedOptions.setLength(allSelectedOptions.length()-2);
+                        }
+                        txtSelection.setText(allSelectedOptions.toString());
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        txtSelection.setText("Select Book's Subject");
+                    }
+                });
+                dropdownBox.show();
+            }
+        });
     }
     //Method to add Usernames inside the database.
     public void addUsername(View view){
@@ -69,17 +96,18 @@ public class CreateAccount extends AppCompatActivity {
         @SuppressLint("WrongViewCast")
         TextInputLayout fieldUsername = findViewById(R.id.tilwUsername);
         TextInputLayout fieldPassword = findViewById(R.id.tilwPassword);
+        TextView txtSelection = findViewById(R.id.textSelection);
         EditText txtUsername =fieldUsername.getEditText();
         EditText txtPassword= fieldPassword.getEditText();
         String nUsername=txtUsername.getText().toString();
         String nPassword=txtPassword.getText().toString();
-        //Users newUser = new Users(nUsername, nPassword);
         newUser.setUsername(nUsername);
-        newUser.setUsername(nPassword);
+        newUser.setPassword(nPassword);
         databaseReference=database.getReference("Users");
         databaseReference.child(newUser.toString()).setValue(newUser);
         Toast.makeText(CreateAccount.this, "Congrats. Account created successfully", Toast.LENGTH_LONG).show();
         txtUsername.setText("");
         txtPassword.setText("");
+        txtSelection.setText("Select Book's Subject");
     }
 }
