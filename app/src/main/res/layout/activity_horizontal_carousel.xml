@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookCarousel"
             android:layout_width="372dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
