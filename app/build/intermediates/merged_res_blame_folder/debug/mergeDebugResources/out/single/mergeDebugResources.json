@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\layout_activity_create_account.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\layout\\activity_create_account.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\drawable_picture2.png.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\drawable\\picture2.png"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\layout_activity_horizontal_carousel.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\layout\\activity_horizontal_carousel.xml"
+    },
+    {
+        "merged": "com.example.project_ui_implementation.app-debug-35:/layout_activity_create_account.xml.flat",
+        "source": "com.example.project_ui_implementation.app-main-37:/layout/activity_create_account.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\layout_activity_main.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\layout_book_item.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\layout\\book_item.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.project_ui_implementation.app-debug-35:/layout_activity_horizontal_carousel.xml.flat",
+        "source": "com.example.project_ui_implementation.app-main-37:/layout/activity_horizontal_carousel.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-debug-35:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Android-Gradle\\.gradle\\daemon\\8.9\\com.example.project_ui_implementation.app-main-37:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    }
+]
