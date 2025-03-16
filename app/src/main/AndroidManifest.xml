@@ -16,6 +16,9 @@
         android:theme="@style/Theme.ProjectUIImplementation"
         tools:targetApi="31">
         <activity
+            android:name=".homePage"
+            android:exported="false" />
+        <activity
             android:name=".CreateAccount"
             android:exported="false" />
         <activity

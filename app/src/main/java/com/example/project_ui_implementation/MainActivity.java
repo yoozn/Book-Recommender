@@ -8,6 +8,7 @@ import android.text.SpannableString;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,13 +18,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project_ui_implementation.model.Users;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     private TextView googleLogin;
+
+    private TextView crtAccount;
+
+    //private ArrayList<Users> dbUsers= new ArrayList<>();
 
 
     @Override
@@ -35,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
          * Setting specific text, Google Account to be clickable.
          * Also to make the Create Account here to be clickable.
          */
-        TextView googleLogin = findViewById(R.id.loginGoogle);
-        TextView crtAccount = findViewById(R.id.crtAccountTXT);
+        googleLogin = findViewById(R.id.loginGoogle);
+        crtAccount = findViewById(R.id.crtAccountTXT);
         String txtGL= googleLogin.getText().toString();
         String txtcrtA=crtAccount.getText().toString();
         SpannableString spannabletxtGL= new SpannableString(txtGL);
@@ -69,5 +79,55 @@ public class MainActivity extends AppCompatActivity {
         googleLogin.setText(spannabletxtGL);
         //----------------------------------------------------------------------//
     }
+    public void validLogin(View view){
+        //Database setting to access the data from the users reference.
+        database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
+        databaseReference=database.getReference("Users");
+
+        //Setting a reference to the actual fields where the user enters their credentials.
+        TextInputLayout fieldUsername = findViewById(R.id.layoutUsernameInput);
+        TextInputLayout fieldPassword = findViewById(R.id.layoutPasswordInput);
+
+        //Getting the data in the format of a EditText
+        EditText txtUsername = fieldUsername.getEditText();
+        EditText txtPassword = fieldPassword.getEditText();
+
+        //Getting the actual data into a string variable
+        String nUsername = txtUsername.getText().toString();
+        String nPassword = txtPassword.getText().toString();
+
+        //Creating a constructor a user instance.
+        Users CurrentUser = new Users (nUsername, nPassword);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isValid = false;
+                if (snapshot.exists()){
+                    for (DataSnapshot UsersSnapshot: snapshot.getChildren()){
+                        Users dbUsers = UsersSnapshot.getValue(Users.class);
+                        if (dbUsers.getUsername().equals(nUsername) && dbUsers.getPassword().equals(nPassword)){
+                            Toast.makeText(MainActivity.this, "User was successfully found.. ",Toast.LENGTH_LONG).show();
+                            isValid= true;
+                            break;
+                        }
+                    }
+                }
+            if (isValid){
+                Intent goHomepage = new Intent(MainActivity.this, homePage.class);
+                startActivity(goHomepage);
+            }
+            else {
+                Toast.makeText(MainActivity.this, "User was not found...Try Again ",Toast.LENGTH_LONG).show();
+                txtUsername.setText("");
+                txtPassword.setText("");
+            }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
 
