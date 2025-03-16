@@ -37,9 +37,9 @@ public class HorizontalCarouselActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.bookCarousel);
         bookList = new ArrayList<>();
-        bookList.add(new Books("Book Number One", "Test Author1"));
-        bookList.add(new Books("Book Number Two", "Test Author2"));
-        bookList.add(new Books("Book Number Three", "Test Author3"));
+        bookList.add(new Books("Book Number One", "Test Author1", "Fantasy"));
+        bookList.add(new Books("Book Number Two", "Test Author2", "Non-Fiction"));
+        bookList.add(new Books("Book Number Three", "Test Author3", "Biography"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 

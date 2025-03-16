@@ -36,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
          * Also to make the Create Account here to be clickable.
          */
 
+        /**
         Intent intent = new Intent(MainActivity.this, HorizontalCarouselActivity.class);
         startActivity(intent);
+         **/
         TextView googleLogin = findViewById(R.id.loginGoogle);
         TextView crtAccount = findViewById(R.id.crtAccountTXT);
         String txtGL= googleLogin.getText().toString();
