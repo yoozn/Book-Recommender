@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
          * Setting specific text, Google Account to be clickable.
          * Also to make the Create Account here to be clickable.
          */
-
+/**
         Intent myIntent = new Intent(this, SearchTest.class);
         startActivity(myIntent);
-
+         */
         googleLogin = findViewById(R.id.loginGoogle);
         crtAccount = findViewById(R.id.crtAccountTXT);
         String txtGL= googleLogin.getText().toString();
