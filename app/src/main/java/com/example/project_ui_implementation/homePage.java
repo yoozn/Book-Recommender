@@ -87,6 +87,8 @@ public class homePage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(homePage.this, "Book Search Started", Toast.LENGTH_LONG).show();
+                Intent goSearch = new Intent(homePage.this, SearchTest.class);
+                startActivity(goSearch);
             }
         });
 
