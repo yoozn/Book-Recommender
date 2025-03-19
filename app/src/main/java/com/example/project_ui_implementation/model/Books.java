@@ -32,6 +32,10 @@ public class Books {
         return genre;
     }
 
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
 }
 
 

@@ -61,7 +61,8 @@ public class homePage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
 
-        bookAdapter = new BookAdapter(bookList);
+        bookAdapter = new BookAdapter();
+        bookAdapter.setBooks(bookList);
         recyclerView.setAdapter(bookAdapter);
 
 
