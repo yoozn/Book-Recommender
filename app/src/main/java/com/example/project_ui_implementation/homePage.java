@@ -10,7 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_ui_implementation.model.BookAdapter;
+import com.example.project_ui_implementation.model.Books;
 import com.example.project_ui_implementation.model.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,8 +22,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class homePage extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class homePage extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private BookAdapter bookAdapter;
+    private ArrayList<Books> bookList;
     private Users CurrentUser;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -43,5 +51,19 @@ public class homePage extends AppCompatActivity {
         //Setting the environment of the database.
         database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
         databaseReference = database.getReference("Users");
+
+        recyclerView = findViewById(R.id.bookCarousel);
+        bookList = new ArrayList<>();
+        bookList.add(new Books("Book Number One", "Test Author1", "Fantasy"));
+        bookList.add(new Books("Book Number Two", "Test Author2", "Non-Fiction"));
+        bookList.add(new Books("Book Number Three", "Test Author3", "Biography"));
+        bookList.add(new Books("Book Number Four", "Test Author4", "Fiction"));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+
+        bookAdapter = new BookAdapter(bookList);
+        recyclerView.setAdapter(bookAdapter);
+
+
     }
 }
