@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         String nUsername = txtUsername.getText().toString();
         String nPassword = txtPassword.getText().toString();
 
-        //Creating a constructor a user instance.
+        //Creating a constructor for a user instance.
         Users CurrentUser = new Users (nUsername, nPassword);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             if (isValid){
                 Intent goHomepage = new Intent(MainActivity.this, homePage.class);
-                goHomepage.putExtra("currentUsername", nUsername);
+                goHomepage.putExtra("CurrentUser",CurrentUser);
                 startActivity(goHomepage);
             }
             else {

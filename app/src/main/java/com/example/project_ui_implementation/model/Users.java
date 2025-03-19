@@ -1,10 +1,12 @@
 package com.example.project_ui_implementation.model;
 
+import java.io.Serializable;
 import java.net.PasswordAuthentication;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Users {
+//Implementation of Serializable is for passing objects from one Activity to the other
+public class Users implements Serializable {
     //List to keep a history of the Genre.
     private ArrayList<String> Genre;
 
