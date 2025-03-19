@@ -19,4 +19,6 @@
     <string name="select_book_s_genre">Select Book\'s Genre</string>
     <string name="select_the_book_subject">Select the Book Subject</string>
     <string name="select_book_s_subject">Select Book\'s Subject</string>
+    <string name="welcome_back">Welcome Back,</string>
+    <string name="picks_only_for_you">Picks only for you.....</string>
 </resources>
