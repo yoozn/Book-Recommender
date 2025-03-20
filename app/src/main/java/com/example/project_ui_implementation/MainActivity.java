@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project_ui_implementation.model.Admin;
 import com.example.project_ui_implementation.model.Users;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +42,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
+        /**
+         *
+         * Creating a Admin Object and currently the only admin inside the Database.
+         *
+         * String adminUsername = "Ushio";
+         * String adminID="A0001";
+         * String adminPassword = "Administrator";
+         * Admin FirstAdmin = new Admin(adminUsername, adminPassword, adminID);
+         *
+        */
+
+
         /**
          * Setting specific text, Google Account to be clickable.
          * Also to make the Create Account here to be clickable.
@@ -86,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
     public void validLogin(View view){
         //Database setting to access the data from the users reference.
         database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
-        databaseReference=database.getReference("Users");
 
         //Setting a reference to the actual fields where the user enters their credentials.
         TextInputLayout fieldUsername = findViewById(R.id.layoutUsernameInput);
@@ -101,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         String nPassword = txtPassword.getText().toString();
 
         //Creating a constructor for a user instance.
+        databaseReference=database.getReference("Users");
         Users CurrentUser = new Users (nUsername, nPassword);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
