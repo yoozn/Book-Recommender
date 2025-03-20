@@ -36,16 +36,19 @@
         app:layout_constraintVertical_bias="0.126" />
 
     <!--Added features for 2 Horizontal Carousels-->
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="409dp"
         android:layout_height="320dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="260dp"
         android:orientation="vertical"
         android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.394">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bookCarousel"
@@ -60,10 +63,11 @@
         android:id="@+id/linearLayout2"
         android:layout_width="409dp"
         android:layout_height="320dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="568dp"
+        android:layout_marginTop="524dp"
         android:orientation="vertical"
         android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

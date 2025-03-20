@@ -1,5 +1,6 @@
 package com.example.project_ui_implementation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +34,8 @@ public class SearchTest extends AppCompatActivity {
     private BookAdapter bookAdapter;
     private BookApiService bookApiService;
 
+    private Button goHomebtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,13 @@ public class SearchTest extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        goHomebtn = findViewById(R.id.GoBack);
+        goHomebtn.setOnClickListener(v -> {
+            Intent goHomeIntent = new Intent(SearchTest.this, homePage.class);
+            startActivity(goHomeIntent);
+        });
+
 
         searchInput = findViewById(R.id.searchInput);
         Button searchButton = findViewById(R.id.searchButton);
