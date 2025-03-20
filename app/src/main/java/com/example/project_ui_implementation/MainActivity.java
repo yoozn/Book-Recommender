@@ -2,6 +2,7 @@ package com.example.project_ui_implementation;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseDatabase database;
-    DatabaseReference databaseReference;
+
     private TextView googleLogin;
 
     private TextView crtAccount;
@@ -112,33 +113,55 @@ public class MainActivity extends AppCompatActivity {
         String nUsername = txtUsername.getText().toString();
         String nPassword = txtPassword.getText().toString();
 
-        //Creating a constructor for a user instance.
-        databaseReference=database.getReference("Users");
-        Users CurrentUser = new Users (nUsername, nPassword);
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        //Reference to Users inside the database, not including the Admins
+        DatabaseReference usersReference = database.getReference("Users");
+
+        //Reference to Admins inside the database, not including the Users.
+        DatabaseReference adminsReference = database.getReference("Admins");
+
+        usersReference.orderByChild("username").equalTo(nUsername).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                boolean isValid = false;
                 if (snapshot.exists()){
-                    for (DataSnapshot UsersSnapshot: snapshot.getChildren()){
+                    for (DataSnapshot UsersSnapshot: snapshot.getChildren()) {
                         Users dbUsers = UsersSnapshot.getValue(Users.class);
-                        if (dbUsers.getUsername().equals(nUsername) && dbUsers.getPassword().equals(nPassword)){
-                            Toast.makeText(MainActivity.this, "User was successfully found.. ",Toast.LENGTH_LONG).show();
-                            isValid= true;
-                            break;
+                        if (dbUsers.getPassword().equals(nPassword)){
+                            Users CurrentUser = dbUsers;
+                            Intent goHomepage = new Intent(MainActivity.this, homePage.class);
+                            goHomepage.putExtra("CurrentUser",CurrentUser);
+                            startActivity(goHomepage);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Entered Username and Password does not match", Toast.LENGTH_LONG).show();
                         }
                     }
+                } else {
+                    adminsReference.orderByChild("username").equalTo(nUsername).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                for (DataSnapshot AdminsSnapshot: snapshot.getChildren()){
+                                    Admin dbAdmins = AdminsSnapshot.getValue(Admin.class);
+                                    if (dbAdmins.getAdminPassword().equals(nPassword)){
+                                        Admin CurrentAdmin = dbAdmins;
+                                        Intent goAdminPage = new Intent(MainActivity.this, AdminMenu.class);
+                                        goAdminPage.putExtra("CurrentAdmin", CurrentAdmin);
+                                        startActivity(goAdminPage);
+                                    }else {
+                                        Toast.makeText(MainActivity.this, "Entered Username and Password does not match", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(MainActivity.this, "User was not found....", Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Toast.makeText(MainActivity.this, "Something went Wrong :(", Toast.LENGTH_LONG).show();
+
+                        }
+                    });
                 }
-            if (isValid){
-                Intent goHomepage = new Intent(MainActivity.this, homePage.class);
-                goHomepage.putExtra("CurrentUser",CurrentUser);
-                startActivity(goHomepage);
-            }
-            else {
-                Toast.makeText(MainActivity.this, "User was not found...Try Again ",Toast.LENGTH_LONG).show();
-                txtUsername.setText("");
-                txtPassword.setText("");
-            }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -146,6 +169,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
 

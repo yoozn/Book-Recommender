@@ -1,6 +1,8 @@
 package com.example.project_ui_implementation.model;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
     private String adminID;
 
     private String Username;

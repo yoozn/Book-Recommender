@@ -22,4 +22,5 @@
     <string name="welcome_back">Welcome Back,</string>
     <string name="picks_only_for_you">Picks only for you.....</string>
     <string name="search">Search</string>
+    <string name="welcome_to_the_admin_menu">Welcome to the Admin Menu,</string>
 </resources>
