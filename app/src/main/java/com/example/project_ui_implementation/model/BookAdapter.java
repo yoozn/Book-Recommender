@@ -1,6 +1,7 @@
 package com.example.project_ui_implementation.model;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookTitle.setText(book.getTitle());
         holder.bookAuthor.setText(book.getAuthor());
         //holder.bookCover.setBackgroundColor(Color.parseColor("#FF5733")); // Purple-ish
+        Log.d("GlideCheck", "Thumbnail URL: " + book.getThumbnail());
         Glide.with(holder.itemView.getContext()).load(book.getThumbnail()).into(holder.bookCover);
     }
 

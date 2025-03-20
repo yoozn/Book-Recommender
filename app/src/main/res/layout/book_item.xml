@@ -25,7 +25,8 @@
                 android:id="@+id/bookCover"
                 android:layout_width="120dp"
                 android:layout_height="180dp"
-                android:background="#4A62DC" />
+                android:background="#4A62DC"
+                />
 
             <TextView
                 android:id="@+id/bookTitle"
