@@ -18,6 +18,9 @@
         android:theme="@style/Theme.ProjectUIImplementation"
         tools:targetApi="33">
         <activity
+            android:name=".BookDetails"
+            android:exported="false" />
+        <activity
             android:name=".AdminMenu"
             android:exported="false" />
         <activity
