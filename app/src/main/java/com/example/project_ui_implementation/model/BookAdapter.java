@@ -18,6 +18,10 @@ import java.util.List;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
     private List<Books> bookList;
 
+    //Adding a new attribute so that there is a way to check which Layout is needed.
+    private boolean isWideBook;
+
+
     /**
     public BookAdapter(List<Books> bookList) {
         this.bookList = bookList;
@@ -28,9 +32,16 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         notifyDataSetChanged();
     }
 
+    //Adding a method to set which display will be needed.
+    public void setWideBook(boolean displayType){
+        isWideBook = displayType;
+    }
+
+    //Depending on the value of the isWideBook then use a specific book.xml file
     @Override
     public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_item, parent, false);
+        int SelectedLayutID = isWideBook ? R.layout.wide_book : R.layout.book_item;
+        View view = LayoutInflater.from(parent.getContext()).inflate(SelectedLayutID, parent, false);
         return new BookViewHolder(view);
     }
 

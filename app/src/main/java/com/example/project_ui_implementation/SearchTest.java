@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +37,7 @@ public class SearchTest extends AppCompatActivity {
 
     private Button goHomebtn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +60,14 @@ public class SearchTest extends AppCompatActivity {
         Button searchButton = findViewById(R.id.searchButton);
         recyclerView = findViewById(R.id.bookSearchResults);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //Setting 2 Books per row
+        GridLayoutManager LayoutManager = new GridLayoutManager(this, 2);
+
+
+        recyclerView.setLayoutManager(LayoutManager);
         bookAdapter = new BookAdapter();
+        //use a different layout
+        bookAdapter.setWideBook(true);
         recyclerView.setAdapter(bookAdapter);
 
         bookApiService = RetrofitClient.getInstance().create(BookApiService.class);
