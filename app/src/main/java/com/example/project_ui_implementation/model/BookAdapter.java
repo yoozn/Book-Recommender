@@ -1,5 +1,9 @@
 package com.example.project_ui_implementation.model;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,11 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.project_ui_implementation.R;
+import com.example.project_ui_implementation.SearchTest;
+import com.example.project_ui_implementation.homePage;
 
 import java.util.List;
 
@@ -20,6 +27,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     //Adding a new attribute so that there is a way to check which Layout is needed.
     private boolean isWideBook;
+    Context context;
 
 
     /**
@@ -27,6 +35,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         this.bookList = bookList;
     }
      **/
+
+    public BookAdapter(Context context) {
+        this.context = context;
+    }
+
     public void setBooks (List<Books> books) {
         this.bookList = books;
         notifyDataSetChanged();
@@ -53,7 +66,20 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         //holder.bookCover.setBackgroundColor(Color.parseColor("#FF5733")); // Purple-ish
         Log.d("GlideCheck", "Thumbnail URL: " + book.getThumbnail());
         Glide.with(holder.itemView.getContext()).load(book.getThumbnail()).into(holder.bookCover);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                /**
+                Intent i = new Intent(context, homePage.class);
+                context.startActivity(i);
+                 **/
+                Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
+
 
     @Override
     public int getItemCount() {

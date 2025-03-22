@@ -110,11 +110,11 @@ public class homePage extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bottom_recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false ));
 
-        bookAdapter = new BookAdapter();
+        bookAdapter = new BookAdapter(homePage.this);
         bookAdapter.setBooks(bookList);
         bookAdapter.setWideBook(false);
         //bookAdapter = new BookAdapter(bookList);
-        bottom_BookAdapter = new BookAdapter();
+        bottom_BookAdapter = new BookAdapter(homePage.this);
         //Use a specific layout
         bottom_BookAdapter.setBooks(bottom_bookList);
         bookAdapter.setWideBook(false);

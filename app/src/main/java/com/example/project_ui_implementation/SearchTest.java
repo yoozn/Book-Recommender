@@ -65,7 +65,7 @@ public class SearchTest extends AppCompatActivity {
 
 
         recyclerView.setLayoutManager(LayoutManager);
-        bookAdapter = new BookAdapter();
+        bookAdapter = new BookAdapter(SearchTest.this);
         //use a different layout
         bookAdapter.setWideBook(true);
         recyclerView.setAdapter(bookAdapter);
