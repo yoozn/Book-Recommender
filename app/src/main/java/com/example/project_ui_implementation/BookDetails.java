@@ -2,7 +2,9 @@ package com.example.project_ui_implementation;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +45,15 @@ public class BookDetails extends AppCompatActivity {
         vAuthor.setText(author);
         vDescription.setText(description);
         Glide.with(this).load(thumbnail).into(vThumbnail);
+
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(BookDetails.this, "Selected rating: " + rating, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         //vGenre = findViewById(R.id.genrePreview);
     }
