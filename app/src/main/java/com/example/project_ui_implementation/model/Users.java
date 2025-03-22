@@ -40,6 +40,10 @@ public class Users implements Serializable {
         Password = password;
     }
 
+    public void setGenre(ArrayList<String>S){
+        Genre = S;
+    }
+
     public void setUsername(String username) {
         Username = username;
     }
