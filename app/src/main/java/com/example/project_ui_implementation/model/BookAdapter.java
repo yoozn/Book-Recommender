@@ -77,6 +77,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 i.putExtra("thumbnail", book.getThumbnail());
                 i.putExtra("Author", book.getAuthor());
                 i.putExtra("genre", book.getGenre());
+                i.putExtra("description", book.getDescription());
                 context.startActivity(i);
 
                 //Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
