@@ -75,7 +75,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 Intent i = new Intent(context, BookDetails.class);
                 i.putExtra("title", book.getTitle());
                 i.putExtra("thumbnail", book.getThumbnail());
-                i.putExtra("Author", book.getAuthor());
+                i.putExtra("author", book.getAuthor());
                 i.putExtra("genre", book.getGenre());
                 i.putExtra("description", book.getDescription());
                 context.startActivity(i);

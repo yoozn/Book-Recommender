@@ -1,66 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookDetails">
+    android:fillViewport="true">
 
-    <ImageView
-        android:id="@+id/thumbnailPreview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="21dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/ic_launcher_background" />
 
-    <TextView
-        android:id="@+id/titlePreview"
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Sample Title"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/thumbnailPreview"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+        tools:context=".BookDetails">
 
-    <TextView
-        android:id="@+id/descriptionPreview"
-        android:layout_width="410dp"
-        android:layout_height="203dp"
-        android:layout_marginTop="12dp"
-        android:text="Sample Description"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/authorPreview"
-        tools:layout_editor_absoluteX="1dp" />
+        <ImageView
+            android:id="@+id/thumbnailPreview"
+            android:layout_width="170dp"
+            android:layout_height="240dp"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:layout_marginStart="151dp"
+            android:layout_marginTop="21dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_launcher_background" />
 
-    <Button
-        android:id="@+id/rateBookButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Rate Book"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionPreview"
-        tools:layout_editor_absoluteX="0dp" />
+        <TextView
+            android:id="@+id/titlePreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Canada ABC"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@+id/thumbnailPreview"
+            tools:layout_editor_absoluteX="0dp" />
 
-    <TextView
-        android:id="@+id/authorPreview"
-        android:layout_width="408dp"
-        android:layout_height="23dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@+id/titlePreview"
-        tools:layout_editor_absoluteX="0dp" />
+        <TextView
+            android:id="@+id/descriptionPreview"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="12dp"
+            android:text="Sample Description"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/authorPreview" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/rateBookButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Rate Book"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionPreview"
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_margin="20dp"/>
+
+        <TextView
+            android:id="@+id/authorPreview"
+            android:layout_width="408dp"
+            android:layout_height="23dp"
+            android:layout_marginEnd="3dp"
+            android:text="Paul Covello"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/titlePreview"
+            app:layout_constraintStart_toStartOf="@+id/titlePreview"
+            app:layout_constraintTop_toBottomOf="@+id/titlePreview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
