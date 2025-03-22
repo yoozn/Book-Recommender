@@ -1,21 +1,38 @@
 package com.example.project_ui_implementation;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.project_ui_implementation.model.Admin;
+import com.example.project_ui_implementation.model.Books;
 import com.example.project_ui_implementation.model.Users;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminMenu extends AppCompatActivity {
 
     private Admin CurrentAdmin;
+
+    FirebaseDatabase database;
 
 
     @Override
@@ -39,9 +56,49 @@ public class AdminMenu extends AppCompatActivity {
         WelcomeMessageAdmin.append(CurrentAdmin.getUsername());
         welcomeMessage.setText(WelcomeMessageAdmin.toString());
 
+        Button goBack = findViewById(R.id.goBackbtn);
+
+        database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
 
 
+        goBack.setOnClickListener(v -> {
+            Intent goHome = new Intent(AdminMenu.this, homePage.class);
+            startActivity(goHome);
+        });
 
+        Button seeUsers = findViewById(R.id.usersbtn);
 
+        seeUsers.setOnClickListener(v -> {
+
+            ArrayList<Users> CurrentUsers= new ArrayList<>();
+
+            DatabaseReference usersReference = database.getReference("Users");
+            usersReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()){
+                        Users db = userSnapshot.getValue(Users.class);
+                            CurrentUsers.add(db);
+                    }
+                    StringBuilder allUsers = new StringBuilder();
+                    for (int i=0; i<CurrentUsers.size(); i++){
+                        allUsers.append(CurrentUsers.get(i).toString());
+                        allUsers.append("\n");
+                    }
+                    AlertDialog.Builder displayUsers = new AlertDialog.Builder(AdminMenu.this);
+                    displayUsers.setTitle("Current Users inside the Database");
+                    displayUsers.setMessage(allUsers.toString());
+                    displayUsers.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    }).show();
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(AdminMenu.this, "Something went Wrong :(", Toast.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 }
