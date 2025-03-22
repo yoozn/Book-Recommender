@@ -127,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
                         Users dbUsers = UsersSnapshot.getValue(Users.class);
                         if (dbUsers.getPassword().equals(nPassword)){
                             Users CurrentUser = dbUsers;
+                            if (CurrentUser.getGenre() == null){
+                              ArrayList<String> CurrentGenre = new ArrayList<>();
+                                for (DataSnapshot genreValues : UsersSnapshot.child("genre").getChildren()) {
+                                    CurrentGenre.add(genreValues.getValue(String.class));
+                                }
+                                CurrentUser.setGenre(CurrentGenre);
+                            }
                             Intent goHomepage = new Intent(MainActivity.this, homePage.class);
                             goHomepage.putExtra("CurrentUser",CurrentUser);
                             startActivity(goHomepage);

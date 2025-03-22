@@ -17,7 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ui_implementation.model.BookAdapter;
+import com.example.project_ui_implementation.model.BookApiService;
+import com.example.project_ui_implementation.model.BookResponse;
 import com.example.project_ui_implementation.model.Books;
+import com.example.project_ui_implementation.model.RetrofitClient;
 import com.example.project_ui_implementation.model.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +29,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class homePage extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -47,6 +54,8 @@ public class homePage extends AppCompatActivity {
 
     TextView fieldRecommendation;
 
+    private BookApiService bookApiService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +63,16 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Intent getIntent = getIntent();
         CurrentUser = (Users) getIntent.getSerializableExtra("CurrentUser");
+
+        //All the necessary information about a user
         String currentUsername = CurrentUser.getUsername();
+        ArrayList<String> CG = CurrentUser.getGenre();
+
+
+
+
+
+
         StringBuilder welcomeMessage = new StringBuilder();
 
         fieldWelcomeMessage = findViewById(R.id.welcomeMessage);
@@ -63,7 +81,7 @@ public class homePage extends AppCompatActivity {
         StringBuilder txtUserRecommendation= new StringBuilder();
         txtUserRecommendation.append("From ");
         txtUserRecommendation.append(currentUsername);
-        txtUserRecommendation.append("'s Favorite Author...");
+        txtUserRecommendation.append("'s Last Activity...");
         fieldRecommendation.setText(txtUserRecommendation.toString());
 
 
@@ -100,12 +118,32 @@ public class homePage extends AppCompatActivity {
         bookList.add(new Books("Book Number Three", "Test Author3", "Biography"));
         bookList.add(new Books("Book Number Four", "Test Author4", "Fiction"));
 
-        bottom_bookList.add(new Books("Book Number Five", "Test Author5", "Romance"));
-        bottom_bookList.add(new Books("Book Number Six", "Test Author6", "History"));
-        bottom_bookList.add(new Books("Book Number Seven", "Test Author7", "Cooking"));
-        bottom_bookList.add(new Books("Book Number Eight", "Test Author8", "Programming"));
-        bottom_bookList.add(new Books("Book Number Nine", "Test Author9", "Fiction"));
-        bottom_bookList.add(new Books("Book Number Ten", "Test Author", "Science"));
+        bookApiService = RetrofitClient.getInstance().create(BookApiService.class);
+
+
+
+        //This would simply use the last genre entered inside the array, meaning
+        //the most recent one.
+        //String lastGenre = CurrentGenre.get(CurrentGenre.size()-1);
+        String lastGenre = CG.get(CG.size() -1);
+
+        bookApiService.searchBooks(lastGenre).enqueue(new Callback<BookResponse>() {
+            @Override
+            public void onResponse(Call<BookResponse> call, Response<BookResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    bottom_bookList = (ArrayList<Books>) response.body().getBooks();
+                    bottom_BookAdapter = new BookAdapter();
+                    bottom_BookAdapter.setBooks(bottom_bookList);
+                    bookAdapter.setWideBook(false);
+                    bottom_recyclerView.setAdapter(bottom_BookAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BookResponse> call, Throwable t) {
+                Toast.makeText(homePage.this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         bottom_recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false ));
@@ -114,13 +152,13 @@ public class homePage extends AppCompatActivity {
         bookAdapter.setBooks(bookList);
         bookAdapter.setWideBook(false);
         //bookAdapter = new BookAdapter(bookList);
-        bottom_BookAdapter = new BookAdapter();
+
         //Use a specific layout
-        bottom_BookAdapter.setBooks(bottom_bookList);
-        bookAdapter.setWideBook(false);
+
+
 
         recyclerView.setAdapter(bookAdapter);
-        bottom_recyclerView.setAdapter(bottom_BookAdapter);
+
 
     }
 }
