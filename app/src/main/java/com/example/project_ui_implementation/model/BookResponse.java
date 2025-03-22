@@ -27,6 +27,8 @@ public class BookResponse {
         String title;
         List<String> authors;
         ImageLinks imageLinks;
+        //synopsis
+        //genre
     }
 
     private static class ImageLinks {

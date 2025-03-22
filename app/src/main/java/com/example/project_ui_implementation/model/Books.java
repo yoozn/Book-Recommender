@@ -5,12 +5,14 @@ public class Books {
     private String author;
     private String genre;
     private String thumbnail;
+    private int rate;
 
 
     public Books(String title, String author, String genre) {
         this.title = title;
         this.author = author;
         this.genre = genre;
+        this.rate = 0;
     }
 
     public Books(String title, String author, String genre, String thumbnail) {
@@ -35,6 +37,10 @@ public class Books {
     public String getThumbnail() {
         return thumbnail;
     }
+
+    public int getRate() { return rate;}
+
+    public void setRating(int rate) { this.rate = rate;}
 
 }
 
