@@ -24,4 +24,5 @@
     <string name="search">Search</string>
     <string name="welcome_to_the_admin_menu">Welcome to the Admin Menu,</string>
     <string name="enter_book_s_title">Enter Book\'s Title</string>
+    <string name="go_back_to_home">Go Back to Home</string>
 </resources>
