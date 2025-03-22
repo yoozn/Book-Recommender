@@ -1,10 +1,13 @@
 package com.example.project_ui_implementation.model;
 
+import java.util.TreeMap;
+
 public class Books {
     private String title;
     private String author;
     private String genre;
     private String thumbnail;
+    TreeMap<Users, Integer> ratings;
     private int rate;
     private String description;
 
@@ -13,7 +16,7 @@ public class Books {
         this.title = title;
         this.author = author;
         this.genre = genre;
-        this.rate = 0;
+        //this.rate = 0;
     }
 
     public Books(String title, String author, String genre, String thumbnail, String description) {
@@ -40,7 +43,13 @@ public class Books {
         return thumbnail;
     }
 
-    public int getRate() { return rate;}
+    public double getRate() {
+        double sum = 0;
+        for (int i : ratings.values()) {
+            sum += i;
+        }
+        return sum / ratings.size();
+    }
     public String getDescription() { return description; }
 
     public void setRating(int rate) { this.rate = rate;}
