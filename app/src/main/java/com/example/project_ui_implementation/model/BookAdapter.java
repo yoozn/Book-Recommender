@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.project_ui_implementation.BookDetails;
 import com.example.project_ui_implementation.R;
 import com.example.project_ui_implementation.SearchTest;
 import com.example.project_ui_implementation.homePage;
@@ -63,17 +64,22 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Books book = bookList.get(position);
         holder.bookTitle.setText(book.getTitle());
         holder.bookAuthor.setText(book.getAuthor());
+
         //holder.bookCover.setBackgroundColor(Color.parseColor("#FF5733")); // Purple-ish
         Log.d("GlideCheck", "Thumbnail URL: " + book.getThumbnail());
         Glide.with(holder.itemView.getContext()).load(book.getThumbnail()).into(holder.bookCover);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                /**
-                Intent i = new Intent(context, homePage.class);
+
+                Intent i = new Intent(context, BookDetails.class);
+                i.putExtra("title", book.getTitle());
+                i.putExtra("thumbnail", book.getThumbnail());
+                i.putExtra("Author", book.getAuthor());
+                i.putExtra("genre", book.getGenre());
                 context.startActivity(i);
-                 **/
-                Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
 

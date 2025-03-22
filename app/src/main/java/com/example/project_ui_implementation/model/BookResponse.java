@@ -13,7 +13,8 @@ public class BookResponse {
                 String title = item.volumeInfo.title;
                 String author = (item.volumeInfo.authors != null && !item.volumeInfo.authors.isEmpty()) ? item.volumeInfo.authors.get(0) : "Unknown Author";
                 String thumbnail = (item.volumeInfo.imageLinks != null) ? item.volumeInfo.imageLinks.thumbnail : null;
-                books.add(new Books(title, author, " ", thumbnail));
+                String genre = item.volumeInfo.genre;
+                books.add(new Books(title, author, genre, thumbnail));
             }
         }
         return books;
@@ -29,6 +30,7 @@ public class BookResponse {
         ImageLinks imageLinks;
         //synopsis
         //genre
+        String genre;
     }
 
     private static class ImageLinks {
