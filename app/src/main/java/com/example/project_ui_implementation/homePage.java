@@ -30,6 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +42,7 @@ public class homePage extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BookAdapter bookAdapter;
 
-    private ArrayList<Books> bookList;
+    private List<Books> bookList;
 
 
     private RecyclerView bottom_recyclerView;
@@ -117,14 +120,15 @@ public class homePage extends AppCompatActivity {
 
         bookList = new ArrayList<>();
         bottom_bookList = new ArrayList<>();
+        /**
 
         bookList.add(new Books("Book Number One", "Test Author1", "Fantasy"));
         bookList.add(new Books("Book Number Two", "Test Author2", "Non-Fiction"));
         bookList.add(new Books("Book Number Three", "Test Author3", "Biography"));
         bookList.add(new Books("Book Number Four", "Test Author4", "Fiction"));
 
+         **/
         bookApiService = RetrofitClient.getInstance().create(BookApiService.class);
-
 
 
         //This would simply use the last genre entered inside the array, meaning
@@ -163,7 +167,46 @@ public class homePage extends AppCompatActivity {
 
 
         recyclerView.setAdapter(bookAdapter);
+        fetchBooks();
+    }
 
+    private void fetchBooks() {
+        DatabaseReference booksReference = database.getReference("Books");
+        booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookList.clear();
+                for (DataSnapshot bookSnapshot : snapshot.getChildren()) {
+                    String title = bookSnapshot.getKey();
+                    String author = bookSnapshot.child("author").getValue(String.class);
+                    String genre = bookSnapshot.child("genre").getValue(String.class);
+                    String description = bookSnapshot.child("description").getValue(String.class);
+                    String thumbnail = bookSnapshot.child("thumbnail").getValue(String.class);
+                    HashMap<String, Float> ratings = (HashMap<String, Float>) bookSnapshot.child("ratings").getValue();
+                    Float averageRating = bookSnapshot.child("averageRating").getValue(Float.class);
+                    /**
+                    float averageRating = 0.0f;
+                    if (averageRatingStr != null) {
+                        averageRating = Float.parseFloat(averageRatingStr);
+                    }
+**/
+                    Books book = new Books(title, author, genre, thumbnail, description, averageRating);
+                    bookList.add(book);
+                    }
 
+                Collections.sort(bookList, (b1, b2) -> Float.compare(b2.getRate(), b1.getRate()));
+
+                if (bookList.size() > 10) {
+                    bookList = bookList.subList(0, 10);
+                }
+
+                bookAdapter.notifyDataSetChanged();;
+                }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(homePage.this, "Failed to load", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

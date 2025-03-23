@@ -11,7 +11,7 @@ public class Books {
 
     //Change the treeMap so that it takes The user username instead of the actual user.
     HashMap<String, Integer> ratings;
-    private int rate;
+    private Float averageRate;
     private String description;
 
 
@@ -31,6 +31,16 @@ public class Books {
         this.ratings = new HashMap<>();
     }
 
+    public Books(String title, String author, String genre, String thumbnail, String description, Float averageRating) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.thumbnail = thumbnail;
+        this.description = description;
+        this.ratings = new HashMap<>();
+        this.averageRate = averageRating;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -47,7 +57,8 @@ public class Books {
         return thumbnail;
     }
 
-    public double getRate() {
+    public Float getRate() {
+        /**
         if (ratings == null || ratings.isEmpty()) {
             return 0.0f;
         }
@@ -56,10 +67,12 @@ public class Books {
             sum += i;
         }
         return sum / ratings.size();
+         **/
+        return averageRate;
     }
     public String getDescription() { return description; }
 
-    public void setRating(int rate) { this.rate = rate;}
+   // public void setRating(int rate) { this.rate = rate;}
 
 }
 
