@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
                             if (snapshot.exists()){
                                 for (DataSnapshot AdminsSnapshot: snapshot.getChildren()){
                                     Admin dbAdmins = AdminsSnapshot.getValue(Admin.class);
+                                    Toast.makeText(MainActivity.this, "Admin Data" + dbAdmins.getUsername(), Toast.LENGTH_SHORT).show();
                                     if (dbAdmins.getAdminPassword().equals(nPassword)){
                                         Admin CurrentAdmin = dbAdmins;
                                         Intent goAdminPage = new Intent(MainActivity.this, AdminMenu.class);

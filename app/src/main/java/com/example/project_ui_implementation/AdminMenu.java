@@ -49,13 +49,19 @@ public class AdminMenu extends AppCompatActivity {
         CurrentAdmin = (Admin) getIntent.getSerializableExtra("CurrentAdmin");
 
 
-        TextView welcomeMessage = findViewById(R.id.welcomeMessageAdmin);
-        StringBuilder WelcomeMessageAdmin = new StringBuilder();
-        WelcomeMessageAdmin.append(welcomeMessage.getText().toString());
-        WelcomeMessageAdmin.append(" ");
-        WelcomeMessageAdmin.append(CurrentAdmin.getUsername());
-        welcomeMessage.setText(WelcomeMessageAdmin.toString());
+        if (CurrentAdmin != null ) {
+            TextView welcomeMessage = findViewById(R.id.welcomeMessageAdmin);
+            StringBuilder WelcomeMessageAdmin = new StringBuilder();
+            WelcomeMessageAdmin.append(welcomeMessage.getText().toString());
+            WelcomeMessageAdmin.append(" ");
+            WelcomeMessageAdmin.append(CurrentAdmin.getUsername());
+            welcomeMessage.setText(WelcomeMessageAdmin.toString());
+            Toast.makeText(AdminMenu.this, "Admin gotten." + CurrentAdmin.getUsername(), Toast.LENGTH_SHORT).show();
+        }
 
+        else {
+            Toast.makeText(AdminMenu.this, "Null Admin", Toast.LENGTH_SHORT).show();
+        }
         Button goBack = findViewById(R.id.goBackbtn);
 
         database= FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
@@ -69,7 +75,7 @@ public class AdminMenu extends AppCompatActivity {
         Button editBooks = findViewById(R.id.editBook);
 
         editBooks.setOnClickListener(v -> {
-            Intent myIntent = new Intent(AdminMenu.this, AdminMenu.class);
+            Intent myIntent = new Intent(AdminMenu.this, editBooks.class);
             startActivity(myIntent);
         });
 

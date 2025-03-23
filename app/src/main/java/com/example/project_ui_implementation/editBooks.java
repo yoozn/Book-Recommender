@@ -1,6 +1,7 @@
 package com.example.project_ui_implementation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_ui_implementation.model.BookAdapter;
@@ -27,7 +30,7 @@ import java.util.List;
 public class editBooks extends AppCompatActivity {
     RecyclerView recyclerView;
     BookAdapter bookAdapter;
-    private List<Books> bookList;
+    private List<Books> bookList = new ArrayList<>();
     FirebaseDatabase database;
     DatabaseReference databaseReference;
 
@@ -42,11 +45,15 @@ public class editBooks extends AppCompatActivity {
             return insets;
         });
 
+        GridLayoutManager LayoutManager = new GridLayoutManager(this, 2);
+
         recyclerView = findViewById(R.id.adminRV);
         bookAdapter = new BookAdapter(editBooks.this);
         bookAdapter.setBooks(bookList);
         bookAdapter.setWideBook(true);
         recyclerView.setAdapter(bookAdapter);
+        recyclerView.setLayoutManager(LayoutManager);
+
 
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Books");
@@ -59,8 +66,8 @@ public class editBooks extends AppCompatActivity {
         booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                bookList.clear();
                 for (DataSnapshot bookSnapshot : snapshot.getChildren()) {
-                    bookList.clear();
                     String title = bookSnapshot.getKey();
                     String author = bookSnapshot.child("author").getValue(String.class);
                     String genre = bookSnapshot.child("genre").getValue(String.class);
@@ -70,6 +77,7 @@ public class editBooks extends AppCompatActivity {
                     Float averageRating = bookSnapshot.child("averageRating").getValue(Float.class);
                     Books book = new Books(title, author, genre, thumbnail, description, averageRating);
                     bookList.add(book);
+                    Log.d("Test Log",book.getTitle());
                 }
                 bookAdapter.notifyDataSetChanged();
             }
