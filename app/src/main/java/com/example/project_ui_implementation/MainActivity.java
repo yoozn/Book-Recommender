@@ -136,9 +136,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                             Intent goHomepage = new Intent(MainActivity.this, homePage.class);
                             goHomepage.putExtra("CurrentUser",CurrentUser);
+
+                            txtUsername.setText("");
+                            txtPassword.setText("");
+
                             startActivity(goHomepage);
+
                         } else {
                             Toast.makeText(MainActivity.this, "Entered Username and Password does not match", Toast.LENGTH_LONG).show();
+                            txtPassword.setText("");
                         }
                     }
                 } else {
@@ -152,9 +158,14 @@ public class MainActivity extends AppCompatActivity {
                                         Admin CurrentAdmin = dbAdmins;
                                         Intent goAdminPage = new Intent(MainActivity.this, AdminMenu.class);
                                         goAdminPage.putExtra("CurrentAdmin", CurrentAdmin);
+
+                                        txtUsername.setText("");
+                                        txtPassword.setText("");
+
                                         startActivity(goAdminPage);
                                     }else {
                                         Toast.makeText(MainActivity.this, "Entered Username and Password does not match", Toast.LENGTH_LONG).show();
+                                        txtPassword.setText("");
                                     }
                                 }
                             } else {
