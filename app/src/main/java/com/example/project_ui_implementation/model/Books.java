@@ -27,6 +27,7 @@ public class Books {
         this.genre = genre;
         this.thumbnail = thumbnail;
         this.description = description;
+        this.ratings = new TreeMap<>();
     }
 
     public String getTitle() {
@@ -46,6 +47,9 @@ public class Books {
     }
 
     public double getRate() {
+        if (ratings == null || ratings.isEmpty()) {
+            return 0.0f;
+        }
         double sum = 0;
         for (int i : ratings.values()) {
             sum += i;

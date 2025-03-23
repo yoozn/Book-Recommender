@@ -8,14 +8,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.project_ui_implementation.model.Books;
 import com.example.project_ui_implementation.model.UserInSession;
 import com.example.project_ui_implementation.model.Users;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookDetails extends AppCompatActivity {
 
@@ -23,6 +33,7 @@ public class BookDetails extends AppCompatActivity {
     TextView vTitle, vAuthor, vDescription, vGenre;
     ImageView vThumbnail;
 
+    FirebaseDatabase database;
 
     private int rate;
 
@@ -43,6 +54,8 @@ public class BookDetails extends AppCompatActivity {
             return insets;
         });
 
+        database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
+
         vTitle = findViewById(R.id.titlePreview);
         vAuthor = findViewById(R.id.authorPreview);
         vDescription = findViewById(R.id.descriptionPreview);
@@ -62,10 +75,60 @@ public class BookDetails extends AppCompatActivity {
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
 
+        DatabaseReference booksReference = database.getReference("Books").child(title);
+
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 Toast.makeText(BookDetails.this, "Selected rating: " + rating, Toast.LENGTH_SHORT).show();
+                booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.child("ratings").exists()) {
+                            List<Float> ratings = new ArrayList<>();
+                            for (DataSnapshot bookSnapshot : snapshot.child("ratings").getChildren()) {
+                                ratings.add(bookSnapshot.getValue(Float.class));
+                            }
+                            ratings.add(rating);
+
+                            float total = 0;
+                            for (float rate : ratings) {
+                                total += rate;
+                            }
+                            float averageRating = total / ratings.size();
+
+                            booksReference.child("ratings").setValue(ratings);
+                            booksReference.child("averageRating").setValue(averageRating)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(BookDetails.this, "Added rating", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(BookDetails.this, "Failed to add rating", Toast.LENGTH_SHORT).show();
+                                    });
+                        } else {
+                            List<Float> ratings = new ArrayList<>();
+                            ratings.add(rating);
+
+                            Books book = new Books(title, author, genre, thumbnail, description);
+
+                            booksReference.setValue(book)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(BookDetails.this, "Added new book", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        Toast.makeText(BookDetails.this, "Failed to add new book", Toast.LENGTH_SHORT).show();
+                                    });
+                            booksReference.child("ratings").setValue(ratings);
+                            booksReference.child("averageRating").setValue(rating);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(BookDetails.this, "Failed, cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
