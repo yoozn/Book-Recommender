@@ -7,7 +7,9 @@ public class Books {
     private String author;
     private String genre;
     private String thumbnail;
-    TreeMap<Users, Integer> ratings;
+
+    //Change the treeMap so that it takes The user username instead of the actual user.
+    TreeMap<String, Integer> ratings;
     private int rate;
     private String description;
 

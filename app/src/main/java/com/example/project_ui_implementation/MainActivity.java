@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                             Intent goHomepage = new Intent(MainActivity.this, homePage.class);
                             goHomepage.putExtra("CurrentUser",CurrentUser);
 
+
+
                             txtUsername.setText("");
                             txtPassword.setText("");
 

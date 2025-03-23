@@ -1,5 +1,6 @@
 package com.example.project_ui_implementation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -13,12 +14,24 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.project_ui_implementation.model.UserInSession;
+import com.example.project_ui_implementation.model.Users;
 
 public class BookDetails extends AppCompatActivity {
 
     String title, author, description, genre, thumbnail;
     TextView vTitle, vAuthor, vDescription, vGenre;
     ImageView vThumbnail;
+
+
+    private int rate;
+
+    //Receive the information of the current user from other activity
+    private Users CurrentUser =  UserInSession.sessionUser;
+
+    private String Username;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +53,7 @@ public class BookDetails extends AppCompatActivity {
         description = getIntent().getStringExtra("description");
         genre = getIntent().getStringExtra("genre");
         thumbnail = getIntent().getStringExtra("thumbnail");
+        Username = getIntent().getStringExtra("CurrentUsername");
 
         vTitle.setText(title);
         vAuthor.setText(author);

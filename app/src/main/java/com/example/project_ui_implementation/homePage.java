@@ -21,6 +21,7 @@ import com.example.project_ui_implementation.model.BookApiService;
 import com.example.project_ui_implementation.model.BookResponse;
 import com.example.project_ui_implementation.model.Books;
 import com.example.project_ui_implementation.model.RetrofitClient;
+import com.example.project_ui_implementation.model.UserInSession;
 import com.example.project_ui_implementation.model.Users;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,6 +64,10 @@ public class homePage extends AppCompatActivity {
         setContentView(R.layout.activity_home_page);
         Intent getIntent = getIntent();
         CurrentUser = (Users) getIntent.getSerializableExtra("CurrentUser");
+
+        //Global Variable that set to the current User
+        UserInSession.sessionUser = CurrentUser;
+
 
         //All the necessary information about a user
         String currentUsername = CurrentUser.getUsername();
