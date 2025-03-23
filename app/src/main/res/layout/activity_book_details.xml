@@ -32,7 +32,7 @@
             android:id="@+id/titlePreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:text="Canada ABC"
             android:textAlignment="center"
             android:textSize="20sp"
@@ -41,24 +41,37 @@
             tools:layout_editor_absoluteX="0dp" />
 
         <TextView
-            android:id="@+id/descriptionPreview"
-            android:layout_width="380dp"
+            android:id="@+id/authorPreview"
+            android:layout_width="408dp"
+            android:layout_height="23dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="3dp"
+            android:text="Paul Covello"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="@+id/titlePreview"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/titlePreview"
+            app:layout_constraintTop_toBottomOf="@+id/titlePreview" />
+
+        <Button
+            android:id="@+id/rateBookButton"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="12dp"
-            android:text="Sample Description"
-            android:textSize="16sp"
+            android:layout_marginTop="32dp"
+            android:text="Rate Book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/authorPreview" />
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
         <RatingBar
             android:id="@+id/ratingBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:isIndicator="false"
             android:numStars="5"
             android:rating="0"
@@ -68,29 +81,48 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionPreview" />
 
-        <Button
-            android:id="@+id/rateBookButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_marginTop="24dp"
-            android:text="Rate Book"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        <RatingBar
+            android:id="@+id/averageRatingBar"
+            android:layout_width="237dp"
+            android:layout_height="42dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="74dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="84dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="0"
+            android:scaleX="0.6"
+            android:scaleY="0.6"
+            android:stepSize="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/authorPreview"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/authorPreview"
+            app:layout_constraintTop_toBottomOf="@+id/authorPreview" />
 
         <TextView
-            android:id="@+id/authorPreview"
-            android:layout_width="408dp"
-            android:layout_height="23dp"
-            android:layout_marginEnd="3dp"
-            android:text="Paul Covello"
+            android:id="@+id/descriptionPreview"
+            android:layout_width="380dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="40dp"
+            android:text="Sample Description"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/averageRatingText" />
+
+        <TextView
+            android:id="@+id/averageRatingText"
+            android:layout_width="211dp"
+            android:layout_height="30dp"
+            android:text="averagerating"
             android:textAlignment="center"
-            android:textSize="14sp"
-            android:textStyle="italic"
-            app:layout_constraintEnd_toEndOf="@+id/titlePreview"
-            app:layout_constraintStart_toStartOf="@+id/titlePreview"
-            app:layout_constraintTop_toBottomOf="@+id/titlePreview" />
+            app:layout_constraintEnd_toEndOf="@+id/averageRatingBar"
+            app:layout_constraintStart_toStartOf="@+id/averageRatingBar"
+            app:layout_constraintTop_toBottomOf="@+id/averageRatingBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

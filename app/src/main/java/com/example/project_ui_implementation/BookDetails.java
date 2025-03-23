@@ -32,7 +32,7 @@ import java.util.List;
 public class BookDetails extends AppCompatActivity {
 
     String title, author, description, genre, thumbnail;
-    TextView vTitle, vAuthor, vDescription, vGenre;
+    TextView vTitle, vAuthor, vDescription, vGenre, vAverageRatingText;
     ImageView vThumbnail;
 
     Button vRateBookButton;
@@ -46,6 +46,7 @@ public class BookDetails extends AppCompatActivity {
 
     private String Username;
 
+    Float averageRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,8 @@ public class BookDetails extends AppCompatActivity {
         vAuthor = findViewById(R.id.authorPreview);
         vDescription = findViewById(R.id.descriptionPreview);
         vThumbnail = findViewById(R.id.thumbnailPreview);
+        vAverageRatingText = findViewById(R.id.averageRatingText);
+        RatingBar vAverageRatingBar = findViewById(R.id.averageRatingBar);
 
         title = getIntent().getStringExtra("title");
         author = getIntent().getStringExtra("author");
@@ -75,13 +78,32 @@ public class BookDetails extends AppCompatActivity {
         vTitle.setText(title);
         vAuthor.setText(author);
         vDescription.setText(description);
+
+        DatabaseReference booksReference =FirebaseDatabase.getInstance().getReference("Books").child(title);
+
+        booksReference.child("averageRating").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    float averageRating = snapshot.getValue(Float.class);
+                    vAverageRatingBar.setRating(averageRating);
+                    vAverageRatingText.setText(String.format("%.1f", averageRating));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(BookDetails.this, "Failed to load rating", Toast.LENGTH_SHORT).show();
+            }
+        });
+        vAverageRatingText.setText(String.format("%.1f", averageRating));
         Glide.with(this).load(thumbnail).into(vThumbnail);
 
         RatingBar ratingBar = findViewById(R.id.ratingBar);
-
-        DatabaseReference booksReference = database.getReference("Books").child(title);
-
         vRateBookButton = findViewById(R.id.rateBookButton);
+
+
+
         /**
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -191,6 +213,9 @@ public class BookDetails extends AppCompatActivity {
                                 .addOnFailureListener(e -> {
                                     Toast.makeText(BookDetails.this, "Failed to add rating", Toast.LENGTH_SHORT).show();
                                 });
+                        vAverageRatingBar.setRating(averageRating);
+                        vAverageRatingText.setText(String.format("%.1f", averageRating));
+
                     } else {
                         HashMap<String, Float> ratings = new HashMap<>();
                         if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
@@ -210,6 +235,8 @@ public class BookDetails extends AppCompatActivity {
                                 });
                         booksReference.child("ratings").setValue(ratings);
                         booksReference.child("averageRating").setValue(selectedRate);
+                        vAverageRatingBar.setRating(averageRating);
+                        vAverageRatingText.setText(String.format("%.1f", averageRating));
                     }
 
                 }
