@@ -2,6 +2,7 @@ package com.example.project_ui_implementation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,9 +35,11 @@ public class BookDetails extends AppCompatActivity {
     TextView vTitle, vAuthor, vDescription, vGenre;
     ImageView vThumbnail;
 
+    Button vRateBookButton;
+
     FirebaseDatabase database;
 
-    private int rate;
+    private float selectedRate;
 
     //Receive the information of the current user from other activity
     private Users CurrentUser =  UserInSession.sessionUser;
@@ -78,6 +81,8 @@ public class BookDetails extends AppCompatActivity {
 
         DatabaseReference booksReference = database.getReference("Books").child(title);
 
+        vRateBookButton = findViewById(R.id.rateBookButton);
+        /**
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -143,6 +148,77 @@ public class BookDetails extends AppCompatActivity {
                     }
                 });
             }
+        });
+         **/
+
+        ratingBar.setOnRatingBarChangeListener((ratingBar1, rating, fromUser) -> {
+            if (fromUser) {
+                selectedRate = rating;
+            }
+        });
+
+        vRateBookButton.setOnClickListener(v -> {
+            Toast.makeText(BookDetails.this, "Selected rating: " + selectedRate, Toast.LENGTH_SHORT).show();
+            booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.child("ratings").exists()) {
+                        HashMap<String, Float> ratings = new HashMap<>();
+                        for (DataSnapshot bookSnapshot : snapshot.child("ratings").getChildren()) {
+                            String user = bookSnapshot.getKey();
+                            Float userRating = bookSnapshot.getValue(Float.class);
+                            if (user != null && userRating != null) {
+                                ratings.put(user, userRating);
+                            }
+                        }
+                        if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
+                            Toast.makeText(BookDetails.this, "User not logged in!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        ratings.put(CurrentUser.getUsername(), selectedRate);
+
+                        float total = 0;
+                        for (float rate : ratings.values()) {
+                            total += rate;
+                        }
+                        float averageRating = total / ratings.size();
+
+                        booksReference.child("ratings").setValue(ratings);
+                        booksReference.child("averageRating").setValue(averageRating)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(BookDetails.this, "Added rating", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(BookDetails.this, "Failed to add rating", Toast.LENGTH_SHORT).show();
+                                });
+                    } else {
+                        HashMap<String, Float> ratings = new HashMap<>();
+                        if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
+                            Toast.makeText(BookDetails.this, "User not logged in!", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        ratings.put(CurrentUser.getUsername(), selectedRate);
+
+                        Books book = new Books(title, author, genre, thumbnail, description);
+
+                        booksReference.setValue(book)
+                                .addOnSuccessListener(aVoid -> {
+                                    Toast.makeText(BookDetails.this, "Added new book", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(BookDetails.this, "Failed to add new book", Toast.LENGTH_SHORT).show();
+                                });
+                        booksReference.child("ratings").setValue(ratings);
+                        booksReference.child("averageRating").setValue(selectedRate);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(BookDetails.this, "Failed, cancelled", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
         //vGenre = findViewById(R.id.genrePreview);
