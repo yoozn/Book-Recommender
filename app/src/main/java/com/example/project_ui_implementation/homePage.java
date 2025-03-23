@@ -170,6 +170,11 @@ public class homePage extends AppCompatActivity {
         fetchBooks();
     }
 
+    protected void onResume() {
+        super.onResume();
+        fetchBooks();
+    }
+
     private void fetchBooks() {
         DatabaseReference booksReference = database.getReference("Books");
         booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
