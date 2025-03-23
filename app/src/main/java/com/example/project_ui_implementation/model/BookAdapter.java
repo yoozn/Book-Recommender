@@ -27,6 +27,7 @@ import com.example.project_ui_implementation.homePage;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
@@ -84,7 +85,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Glide.with(holder.itemView.getContext()).load(book.getThumbnail()).into(holder.bookCover);
 
         if (isEditable) {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            FirebaseDatabase database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
             DatabaseReference booksReference = database.getReference();
 
             holder.editButton.setVisibility(View.VISIBLE);
@@ -93,7 +94,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             holder.editButton.setOnClickListener(v -> showEditDialog(holder.itemView.getContext(), book));
             holder.deleteButton.setOnClickListener(v -> {
                 booksReference.child(book.getTitle()).removeValue()
-                        .addOnSuccessListener(aVoid -> Toast.makeText(context, "Book deleted", Toast.LENGTH_SHORT).show())
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(context, "Book deleted", Toast.LENGTH_SHORT).show();
+                            bookList.remove(position);
+                            notifyItemRemoved(position);
+                        })
                         .addOnFailureListener(e -> Toast.makeText(context, "Failed deletion", Toast.LENGTH_SHORT).show());
             });
         }
@@ -143,7 +148,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     private void showEditDialog(Context context, Books book) {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
         DatabaseReference booksReference = database.getReference();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -157,12 +162,26 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         builder.setView(view);
         builder.setPositiveButton("Save", (dialog, which) -> {
-            String newTitle = titleInput.getText().toString();
-            String newAuthor = authorInput.getText().toString();
+            String newTitle = titleInput.getText().toString().trim();
+            String newAuthor = authorInput.getText().toString().trim();
 
             if (!newTitle.isEmpty() && !newAuthor.isEmpty()) {
-                booksReference.child(book.getTitle()).child("title").setValue(newTitle);
-                booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
+                HashMap<String, Object> updates = new HashMap<>();
+                updates.put("title", newTitle);
+                updates.put("author", newAuthor);
+                booksReference.child(book.getTitle()).updateChildren(updates)
+                                .addOnSuccessListener(aVoid -> {
+                                    book.setTitle(newTitle);
+                                    book.setAuthor(newAuthor);
+                                    notifyDataSetChanged();
+                                    Toast.makeText(context, "book updated", Toast.LENGTH_SHORT).show();
+                                })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(context, "Failed to update book", Toast.LENGTH_SHORT).show();
+                                        });
+
+                //booksReference.child(book.getTitle()).child("title").setValue(newTitle);
+                //booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
             }
         });
         builder.setNegativeButton("Cancel", null);
