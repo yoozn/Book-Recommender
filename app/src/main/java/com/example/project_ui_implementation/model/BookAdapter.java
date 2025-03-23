@@ -86,7 +86,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         if (isEditable) {
             FirebaseDatabase database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
-            DatabaseReference booksReference = database.getReference();
+            DatabaseReference booksReference = database.getReference("Books");
 
             holder.editButton.setVisibility(View.VISIBLE);
             holder.deleteButton.setVisibility(View.VISIBLE);
@@ -149,7 +149,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     private void showEditDialog(Context context, Books book) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://seng-3210-project-4dd9d-default-rtdb.firebaseio.com/");
-        DatabaseReference booksReference = database.getReference();
+        DatabaseReference booksReference = database.getReference("Books");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Edit Book");
@@ -166,9 +166,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             String newAuthor = authorInput.getText().toString().trim();
 
             if (!newTitle.isEmpty() && !newAuthor.isEmpty()) {
-                HashMap<String, Object> updates = new HashMap<>();
-                updates.put("title", newTitle);
-                updates.put("author", newAuthor);
+                //HashMap<String, Object> updates = new HashMap<>();
+                //updates.put("title", newTitle);
+                //updates.put("author", newAuthor);
+                /**
                 booksReference.child(book.getTitle()).updateChildren(updates)
                                 .addOnSuccessListener(aVoid -> {
                                     book.setTitle(newTitle);
@@ -179,9 +180,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                         .addOnFailureListener(e -> {
                                             Toast.makeText(context, "Failed to update book", Toast.LENGTH_SHORT).show();
                                         });
-
-                //booksReference.child(book.getTitle()).child("title").setValue(newTitle);
-                //booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
+**/
+                booksReference.child(book.getTitle()).child("title").setValue(newTitle);
+                booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
             }
         });
         builder.setNegativeButton("Cancel", null);
