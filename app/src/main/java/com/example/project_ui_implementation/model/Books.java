@@ -1,5 +1,6 @@
 package com.example.project_ui_implementation.model;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 
 public class Books {
@@ -9,7 +10,7 @@ public class Books {
     private String thumbnail;
 
     //Change the treeMap so that it takes The user username instead of the actual user.
-    TreeMap<String, Integer> ratings;
+    HashMap<String, Integer> ratings;
     private int rate;
     private String description;
 
@@ -27,7 +28,7 @@ public class Books {
         this.genre = genre;
         this.thumbnail = thumbnail;
         this.description = description;
-        this.ratings = new TreeMap<>();
+        this.ratings = new HashMap<>();
     }
 
     public String getTitle() {

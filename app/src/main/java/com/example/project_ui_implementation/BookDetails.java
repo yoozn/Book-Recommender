@@ -25,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BookDetails extends AppCompatActivity {
@@ -85,14 +86,22 @@ public class BookDetails extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.child("ratings").exists()) {
-                            List<Float> ratings = new ArrayList<>();
+                            HashMap<String, Float> ratings = new HashMap<>();
                             for (DataSnapshot bookSnapshot : snapshot.child("ratings").getChildren()) {
-                                ratings.add(bookSnapshot.getValue(Float.class));
+                                String user = bookSnapshot.getKey();
+                                Float userRating = bookSnapshot.getValue(Float.class);
+                                if (user != null && userRating != null) {
+                                    ratings.put(user, userRating);
+                                }
                             }
-                            ratings.add(rating);
+                            if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
+                                Toast.makeText(BookDetails.this, "User not logged in!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            ratings.put(CurrentUser.getUsername(), rating);
 
                             float total = 0;
-                            for (float rate : ratings) {
+                            for (float rate : ratings.values()) {
                                 total += rate;
                             }
                             float averageRating = total / ratings.size();
@@ -106,8 +115,12 @@ public class BookDetails extends AppCompatActivity {
                                         Toast.makeText(BookDetails.this, "Failed to add rating", Toast.LENGTH_SHORT).show();
                                     });
                         } else {
-                            List<Float> ratings = new ArrayList<>();
-                            ratings.add(rating);
+                            HashMap<String, Float> ratings = new HashMap<>();
+                            if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
+                                Toast.makeText(BookDetails.this, "User not logged in!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            ratings.put(CurrentUser.getUsername(), rating);
 
                             Books book = new Books(title, author, genre, thumbnail, description);
 
