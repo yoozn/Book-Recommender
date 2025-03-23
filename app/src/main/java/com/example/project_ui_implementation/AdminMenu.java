@@ -82,6 +82,7 @@ public class AdminMenu extends AppCompatActivity {
                     }
                     StringBuilder allUsers = new StringBuilder();
                     for (int i=0; i<CurrentUsers.size(); i++){
+                        allUsers.append(i +". ");
                         allUsers.append(CurrentUsers.get(i).toString());
                         allUsers.append("\n");
                     }
