@@ -175,7 +175,7 @@ public class homePage extends AppCompatActivity {
         booksReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                bookList.clear();
+                List<Books> updatedList = new ArrayList<>();
                 for (DataSnapshot bookSnapshot : snapshot.getChildren()) {
                     String title = bookSnapshot.getKey();
                     String author = bookSnapshot.child("author").getValue(String.class);
@@ -191,16 +191,18 @@ public class homePage extends AppCompatActivity {
                     }
 **/
                     Books book = new Books(title, author, genre, thumbnail, description, averageRating);
-                    bookList.add(book);
+                    updatedList.add(book);
                     }
 
                 Collections.sort(bookList, (b1, b2) -> Float.compare(b2.getRate(), b1.getRate()));
 
-                if (bookList.size() > 10) {
-                    bookList = bookList.subList(0, 10);
+                if (updatedList.size() > 10) {
+                    updatedList = new ArrayList<>(updatedList.subList(0, 10));
                 }
 
-                bookAdapter.notifyDataSetChanged();;
+                bookList.clear();
+                bookList.addAll(updatedList);
+                bookAdapter.notifyDataSetChanged();
                 }
 
             @Override
