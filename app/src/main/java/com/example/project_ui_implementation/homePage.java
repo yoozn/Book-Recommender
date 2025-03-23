@@ -194,7 +194,7 @@ public class homePage extends AppCompatActivity {
                     updatedList.add(book);
                     }
 
-                Collections.sort(bookList, (b1, b2) -> Float.compare(b2.getRate(), b1.getRate()));
+                Collections.sort(updatedList, (b1, b2) -> Float.compare(b2.getRate(), b1.getRate()));
 
                 if (updatedList.size() > 10) {
                     updatedList = new ArrayList<>(updatedList.subList(0, 10));
