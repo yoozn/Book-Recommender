@@ -66,6 +66,13 @@ public class AdminMenu extends AppCompatActivity {
             startActivity(goHome);
         });
 
+        Button editBooks = findViewById(R.id.editBook);
+
+        editBooks.setOnClickListener(v -> {
+            Intent myIntent = new Intent(AdminMenu.this, AdminMenu.class);
+            startActivity(myIntent);
+        });
+
         Button seeUsers = findViewById(R.id.usersbtn);
 
         seeUsers.setOnClickListener(v -> {
