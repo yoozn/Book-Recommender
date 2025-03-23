@@ -2,13 +2,17 @@ package com.example.project_ui_implementation.model;
 
 import static androidx.core.content.ContextCompat.startActivity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +24,8 @@ import com.example.project_ui_implementation.BookDetails;
 import com.example.project_ui_implementation.R;
 import com.example.project_ui_implementation.SearchTest;
 import com.example.project_ui_implementation.homePage;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -29,6 +35,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     //Adding a new attribute so that there is a way to check which Layout is needed.
     private boolean isWideBook;
     Context context;
+    private boolean isEditable;
+
+
 
 
 
@@ -45,6 +54,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void setBooks (List<Books> books) {
         this.bookList = books;
         notifyDataSetChanged();
+    }
+
+    public void setEditable(boolean isEditable) {
+        this.isEditable = isEditable;
     }
 
     //Adding a method to set which display will be needed.
@@ -70,6 +83,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         Log.d("GlideCheck", "Thumbnail URL: " + book.getThumbnail());
         Glide.with(holder.itemView.getContext()).load(book.getThumbnail()).into(holder.bookCover);
 
+        if (isEditable) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference booksReference = database.getReference();
+
+            holder.editButton.setVisibility(View.VISIBLE);
+            holder.deleteButton.setVisibility(View.VISIBLE);
+
+            holder.editButton.setOnClickListener(v -> showEditDialog(holder.itemView.getContext(), book));
+            holder.deleteButton.setOnClickListener(v -> {
+                booksReference.child(book.getTitle()).removeValue()
+                        .addOnSuccessListener(aVoid -> Toast.makeText(context, "Book deleted", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(e -> Toast.makeText(context, "Failed deletion", Toast.LENGTH_SHORT).show());
+            });
+        }
+
+        else {
+            holder.editButton.setVisibility(View.GONE);
+            holder.deleteButton.setVisibility(View.GONE);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
 
@@ -83,6 +115,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 //Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
+        }
+
 
     }
 
@@ -95,13 +129,45 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public static class BookViewHolder extends RecyclerView.ViewHolder {
         TextView bookTitle, bookAuthor;
         ImageView bookCover;
+        Button editButton, deleteButton;
 
         public BookViewHolder(View itemView) {
             super(itemView);
             bookTitle = itemView.findViewById(R.id.bookTitle);
             bookAuthor = itemView.findViewById(R.id.bookAuthor);
             bookCover = itemView.findViewById(R.id.bookCover);
+            editButton = itemView.findViewById(R.id.editBookButton);
+            deleteButton = itemView.findViewById(R.id.deleteBookButton);
         }
     }
+
+    private void showEditDialog(Context context, Books book) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference booksReference = database.getReference();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Edit Book");
+
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_edit_book_dialog, null);
+        EditText titleInput = view.findViewById(R.id.editTitle);
+        EditText authorInput = view.findViewById(R.id.editAuthor);
+        titleInput.setText(book.getTitle());
+        titleInput.setText(book.getAuthor());
+
+        builder.setView(view);
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String newTitle = titleInput.getText().toString();
+            String newAuthor = authorInput.getText().toString();
+
+            if (!newTitle.isEmpty() && !newAuthor.isEmpty()) {
+                booksReference.child(book.getTitle()).child("title").setValue(newTitle);
+                booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
+            }
+        });
+        builder.setNegativeButton("Cancel", null);
+        builder.show();
+    }
+
 
 }

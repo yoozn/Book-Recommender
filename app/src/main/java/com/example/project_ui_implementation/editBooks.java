@@ -51,6 +51,7 @@ public class editBooks extends AppCompatActivity {
         bookAdapter = new BookAdapter(editBooks.this);
         bookAdapter.setBooks(bookList);
         bookAdapter.setWideBook(true);
+        bookAdapter.setEditable(true);
         recyclerView.setAdapter(bookAdapter);
         recyclerView.setLayoutManager(LayoutManager);
 
