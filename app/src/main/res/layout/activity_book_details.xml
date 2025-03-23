@@ -118,7 +118,6 @@
             android:id="@+id/averageRatingText"
             android:layout_width="211dp"
             android:layout_height="30dp"
-            android:text="averagerating"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/averageRatingBar"
             app:layout_constraintStart_toStartOf="@+id/averageRatingBar"
