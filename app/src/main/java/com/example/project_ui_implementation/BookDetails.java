@@ -90,6 +90,9 @@ public class BookDetails extends AppCompatActivity {
                     vAverageRatingBar.setRating(averageRating);
                     vAverageRatingText.setText(String.format("%.1f", averageRating));
                 }
+                else {
+                    vAverageRatingText.setText("0.0");
+                }
             }
 
             @Override
