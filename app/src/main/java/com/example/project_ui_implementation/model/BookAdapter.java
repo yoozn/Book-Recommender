@@ -115,7 +115,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 i.putExtra("title", book.getTitle());
                 i.putExtra("thumbnail", book.getThumbnail());
                 i.putExtra("author", book.getAuthor());
-                i.putExtra("genre", book.getGenre());
+                String genre = book.getGenre();
+                if (genre == null || genre.trim().isEmpty()) {
+                    genre = "Unknown Genre";
+                }
+                i.putExtra("genre", genre);
+
                 i.putExtra("description", book.getDescription());
                 i.putExtra("id", book.getId());
                 context.startActivity(i);

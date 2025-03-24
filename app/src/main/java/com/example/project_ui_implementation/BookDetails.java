@@ -66,6 +66,7 @@ public class BookDetails extends AppCompatActivity {
         vDescription = findViewById(R.id.descriptionPreview);
         vThumbnail = findViewById(R.id.thumbnailPreview);
         vAverageRatingText = findViewById(R.id.averageRatingText);
+        vGenre = findViewById(R.id.genrePreview);
         RatingBar vAverageRatingBar = findViewById(R.id.averageRatingBar);
 
         title = getIntent().getStringExtra("title");
