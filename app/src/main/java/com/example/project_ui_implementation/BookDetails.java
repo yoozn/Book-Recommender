@@ -256,12 +256,12 @@ public class BookDetails extends AppCompatActivity {
                 }
             });
 
-            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users").child(UserInSession.sessionUser.getUsername());
+            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users").child("User: " + UserInSession.sessionUser.getUsername());
                     userReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 public void onDataChange(DataSnapshot snapshot) {
                     List<String> genres = new ArrayList<>();
                     if (snapshot.exists()) {
-                        for (DataSnapshot genreSnapshot: snapshot.getChildren()) {
+                        for (DataSnapshot genreSnapshot: snapshot.child("genre").getChildren()) {
                             String existingGenre = genreSnapshot.getValue(String.class);
                             if (existingGenre != null) {
                                 genres.add(existingGenre);
@@ -270,7 +270,7 @@ public class BookDetails extends AppCompatActivity {
                     }
                     if (!genres.contains(genre)) {
                         genres.add(genre);
-                        userReference.setValue(genres);
+                        userReference.child("genre").setValue(genres);
                     }
                 }
 
