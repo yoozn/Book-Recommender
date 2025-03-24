@@ -36,7 +36,9 @@
                 android:layout_marginTop="3dp"
                 android:text="Book Title"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:maxLines="2"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/bookAuthor"
@@ -46,7 +48,10 @@
                 android:layout_marginBottom="2dp"
                 android:text="Author"
                 android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"/>
 
             <Button
                 android:id="@+id/editBookButton"
