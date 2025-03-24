@@ -83,22 +83,21 @@
 
         <RatingBar
             android:id="@+id/averageRatingBar"
-            android:layout_width="237dp"
-            android:layout_height="42dp"
+            android:layout_width="235dp"
+            android:layout_height="41dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="74dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="84dp"
+            android:layout_marginTop="13dp"
             android:isIndicator="true"
             android:numStars="5"
+            android:padding="0dp"
             android:rating="0"
-            android:scaleX="0.6"
-            android:scaleY="0.6"
+            android:scaleX="0.4"
+            android:scaleY="0.4"
             android:stepSize="0.5"
-            app:layout_constraintEnd_toEndOf="@+id/authorPreview"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/authorPreview"
-            app:layout_constraintTop_toBottomOf="@+id/authorPreview" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genrePreview" />
 
         <TextView
             android:id="@+id/descriptionPreview"
@@ -118,11 +117,27 @@
             android:id="@+id/averageRatingText"
             android:layout_width="211dp"
             android:layout_height="30dp"
+            android:layout_marginTop="32dp"
             android:text="0.0"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="@+id/averageRatingBar"
+            app:layout_constraintHorizontal_bias="0.458"
             app:layout_constraintStart_toStartOf="@+id/averageRatingBar"
-            app:layout_constraintTop_toBottomOf="@+id/averageRatingBar" />
+            app:layout_constraintTop_toTopOf="@+id/averageRatingBar" />
+
+        <TextView
+            android:id="@+id/genrePreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="genre"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/authorPreview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

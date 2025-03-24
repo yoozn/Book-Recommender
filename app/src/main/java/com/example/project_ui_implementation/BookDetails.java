@@ -79,6 +79,7 @@ public class BookDetails extends AppCompatActivity {
         vTitle.setText(title);
         vAuthor.setText(author);
         vDescription.setText(description);
+        vGenre.setText(genre);
 
         DatabaseReference booksReference =FirebaseDatabase.getInstance().getReference("Books").child(id);
 
