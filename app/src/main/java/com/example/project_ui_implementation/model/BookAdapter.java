@@ -158,7 +158,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         EditText titleInput = view.findViewById(R.id.editTitle);
         EditText authorInput = view.findViewById(R.id.editAuthor);
         titleInput.setText(book.getTitle());
-        titleInput.setText(book.getAuthor());
+        authorInput.setText(book.getAuthor());
 
         builder.setView(view);
         builder.setPositiveButton("Save", (dialog, which) -> {
@@ -182,7 +182,12 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                         });
 **/
                 booksReference.child(book.getTitle()).child("title").setValue(newTitle);
-                booksReference.child(book.getTitle()).child("author").setValue(newAuthor);
+                booksReference.child(book.getTitle()).child("author").setValue(newAuthor)
+                        .addOnSuccessListener(aVoid -> {
+                            book.setTitle(newTitle);
+                            book.setAuthor(newAuthor);
+                            notifyItemChanged(bookList.indexOf(book));
+                        });
             }
         });
         builder.setNegativeButton("Cancel", null);
