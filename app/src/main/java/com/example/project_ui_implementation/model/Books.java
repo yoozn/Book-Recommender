@@ -7,7 +7,7 @@ public class Books {
     private String title;
     private String bookId;
     private String author;
-    private String genre = "empty genre";
+    private String genre;
     private String thumbnail;
 
     //Change the treeMap so that it takes The user username instead of the actual user.

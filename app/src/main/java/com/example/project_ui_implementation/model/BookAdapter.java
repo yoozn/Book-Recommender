@@ -116,9 +116,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 i.putExtra("thumbnail", book.getThumbnail());
                 i.putExtra("author", book.getAuthor());
                 String genre = book.getGenre();
-                if (genre == null || genre.trim().isEmpty()) {
-                    genre = "Unknown Genre";
-                }
                 i.putExtra("genre", genre);
 
                 i.putExtra("description", book.getDescription());

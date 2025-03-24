@@ -2,6 +2,7 @@ package com.example.project_ui_implementation;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -199,6 +200,8 @@ public class BookDetails extends AppCompatActivity {
                                 ratings.put(user, userRating);
                             }
                         }
+
+
                         if (CurrentUser.getUsername() == null || CurrentUser.getUsername().isEmpty()) {
                             Toast.makeText(BookDetails.this, "User not logged in!", Toast.LENGTH_SHORT).show();
                             return;
@@ -250,6 +253,29 @@ public class BookDetails extends AppCompatActivity {
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     Toast.makeText(BookDetails.this, "Failed, cancelled", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            DatabaseReference userReference = FirebaseDatabase.getInstance().getReference("Users").child(UserInSession.sessionUser.getUsername());
+                    userReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                public void onDataChange(DataSnapshot snapshot) {
+                    List<String> genres = new ArrayList<>();
+                    if (snapshot.exists()) {
+                        for (DataSnapshot genreSnapshot: snapshot.getChildren()) {
+                            String existingGenre = genreSnapshot.getValue(String.class);
+                            if (existingGenre != null) {
+                                genres.add(existingGenre);
+                            }
+                        }
+                    }
+                    if (!genres.contains(genre)) {
+                        genres.add(genre);
+                        userReference.setValue(genres);
+                    }
+                }
+
+                public void onCancelled(DatabaseError error) {
+                    Log.e("Firebase", "FAiled to change genres");
                 }
             });
         });
