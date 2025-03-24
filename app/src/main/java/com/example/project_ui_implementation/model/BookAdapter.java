@@ -98,6 +98,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                             Toast.makeText(context, "Book deleted", Toast.LENGTH_SHORT).show();
                             bookList.remove(position);
                             notifyItemRemoved(position);
+                            notifyItemRangeChanged(position, bookList.size()); // Adjust indexes
                         })
                         .addOnFailureListener(e -> Toast.makeText(context, "Failed deletion", Toast.LENGTH_SHORT).show());
             });
@@ -116,6 +117,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                 i.putExtra("author", book.getAuthor());
                 i.putExtra("genre", book.getGenre());
                 i.putExtra("description", book.getDescription());
+                i.putExtra("id", book.getId());
                 context.startActivity(i);
                 //Toast.makeText(context, "Title: " + book.getTitle(), Toast.LENGTH_SHORT).show();
             }
@@ -181,8 +183,8 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                             Toast.makeText(context, "Failed to update book", Toast.LENGTH_SHORT).show();
                                         });
 **/
-                booksReference.child(book.getTitle()).child("title").setValue(newTitle);
-                booksReference.child(book.getTitle()).child("author").setValue(newAuthor)
+                booksReference.child(book.getId()).child("title").setValue(newTitle);
+                booksReference.child(book.getId()).child("author").setValue(newAuthor)
                         .addOnSuccessListener(aVoid -> {
                             book.setTitle(newTitle);
                             book.setAuthor(newAuthor);

@@ -31,7 +31,7 @@ import java.util.List;
 
 public class BookDetails extends AppCompatActivity {
 
-    String title, author, description, genre, thumbnail;
+    String title, author, description, genre, thumbnail, id;
     TextView vTitle, vAuthor, vDescription, vGenre, vAverageRatingText;
     ImageView vThumbnail;
 
@@ -69,6 +69,7 @@ public class BookDetails extends AppCompatActivity {
         RatingBar vAverageRatingBar = findViewById(R.id.averageRatingBar);
 
         title = getIntent().getStringExtra("title");
+        id = getIntent().getStringExtra("id");
         author = getIntent().getStringExtra("author");
         description = getIntent().getStringExtra("description");
         genre = getIntent().getStringExtra("genre");
@@ -79,7 +80,7 @@ public class BookDetails extends AppCompatActivity {
         vAuthor.setText(author);
         vDescription.setText(description);
 
-        DatabaseReference booksReference =FirebaseDatabase.getInstance().getReference("Books").child(title);
+        DatabaseReference booksReference =FirebaseDatabase.getInstance().getReference("Books").child(id);
 
         booksReference.child("averageRating").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -235,8 +236,8 @@ public class BookDetails extends AppCompatActivity {
                                 });
                         booksReference.child("ratings").setValue(ratings);
                         booksReference.child("averageRating").setValue(selectedRate);
-                        vAverageRatingBar.setRating(averageRating);
-                        vAverageRatingText.setText(String.format("%.1f", averageRating));
+                        vAverageRatingBar.setRating(selectedRate);
+                        vAverageRatingText.setText(String.format("%.1f", selectedRate));
                     }
 
                 }

@@ -5,6 +5,7 @@ import java.util.TreeMap;
 
 public class Books {
     private String title;
+    private String bookId;
     private String author;
     private String genre;
     private String thumbnail;
@@ -24,6 +25,7 @@ public class Books {
 
     public Books(String title, String author, String genre, String thumbnail, String description) {
         this.title = title;
+        this.bookId = title;
         this.author = author;
         this.genre = genre;
         this.thumbnail = thumbnail;
@@ -34,6 +36,7 @@ public class Books {
     public Books(String title, String author, String genre, String thumbnail, String description, Float averageRating) {
         this.title = title;
         this.author = author;
+        this.bookId = title;
         this.genre = genre;
         this.thumbnail = thumbnail;
         this.description = description;
@@ -55,6 +58,9 @@ public class Books {
 
     public String getThumbnail() {
         return thumbnail;
+    }
+    public String getId() {
+        return bookId;
     }
 
     public Float getRate() {
