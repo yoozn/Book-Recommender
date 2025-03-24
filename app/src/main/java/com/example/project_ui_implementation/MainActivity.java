@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(myIntent);
 
          */
-        googleLogin = findViewById(R.id.loginGoogle);
+
         crtAccount = findViewById(R.id.crtAccountTXT);
-        String txtGL= googleLogin.getText().toString();
+
         String txtcrtA=crtAccount.getText().toString();
-        SpannableString spannabletxtGL= new SpannableString(txtGL);
+
         SpannableString spannabletxtcrtA= new SpannableString(txtcrtA);
         //Changing the settings of the Strings inside the textViews
         spannabletxtcrtA.setSpan(new ForegroundColorSpan(Color.RED), 33, 45, 0);
@@ -86,18 +86,6 @@ public class MainActivity extends AppCompatActivity {
         crtAccount.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
         crtAccount.setText(spannabletxtcrtA);
 
-        //Clickable logging for google
-        spannabletxtGL.setSpan(new ForegroundColorSpan(Color.RED), 11, 25, 0);
-        ClickableSpan ClicktxtGL= new ClickableSpan() {
-            @Override
-            public void onClick(@NonNull View widget) {
-                Toast.makeText(MainActivity.this, "Redirecting", Toast.LENGTH_LONG).show();
-            }
-            };
-        spannabletxtGL.setSpan(ClicktxtGL, 11, 25, 0);
-        googleLogin.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
-        googleLogin.setText(spannabletxtGL);
-        //----------------------------------------------------------------------//
     }
     public void validLogin(View view){
         //Database setting to access the data from the users reference.

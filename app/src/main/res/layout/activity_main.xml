@@ -11,21 +11,6 @@
     tools:layout_editor_absoluteY="-28dp">
 
     <TextView
-        android:id="@+id/loginGoogle"
-        android:layout_width="275dp"
-        android:layout_height="40dp"
-        android:fontFamily="serif"
-        android:text="@string/login_with_google_account"
-        android:textAlignment="textStart"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.308"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
-    <TextView
         android:id="@+id/crtAccountTXT"
         android:layout_width="338dp"
         android:layout_height="35dp"
